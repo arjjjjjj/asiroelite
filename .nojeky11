@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ASIRO ELITE | Authentic Sneakers & Grails</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom Styling -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f4eee0;
+            color: #1a1a1a;
+            overflow-x: hidden;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-[#f4eee0] text-[#1a1a1a] min-h-screen">
+
+    <div class="w-full min-h-screen flex flex-col items-center">
+        
+        <!-- Header -->
+        <header class="w-full max-w-7xl px-4 sm:px-6 py-4 flex items-center justify-between border-b border-[#e5dcbe]">
+            <div class="flex items-center gap-2">
+                <span class="font-extrabold text-xl sm:text-2xl tracking-tight text-[#1a1a1a]">ASIRO ELITE</span>
+                <span class="text-[10px] font-semibold tracking-widest px-2 py-0.5 rounded-full bg-[#ebd8b0] text-[#705820]">est 2026</span>
+            </div>
+
+            <!-- Cart Trigger Button -->
+            <button id="cart-btn" onclick="openCartDrawer()" class="relative p-2.5 bg-[#1a1a1a] text-white rounded-full hover:bg-black transition-transform active:scale-95">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                </svg>
+                <span id="cart-count" class="hidden absolute -top-1 -right-1 bg-[#d9381e] text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+            </button>
+        </header>
+
+        <!-- Main Content -->
+        <main class="w-full max-w-7xl px-3 sm:px-6 py-4 sm:py-6 space-y-6 sm:space-y-8">
+            
+            <!-- Hero Banner with Auto-Scrolling Preview -->
+            <div class="w-full bg-[#ebd8b0] rounded-2xl p-5 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm border border-[#dec38e] overflow-hidden">
+                <div class="w-full md:max-w-md space-y-3 text-left">
+                    <span class="inline-block text-[10px] sm:text-[11px] font-bold tracking-wider uppercase px-3 py-1 bg-[#1a1a1a] text-white rounded-full">
+                        • PREMIUM SNEAKERS
+                    </span>
+                    <h1 class="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight leading-none text-[#1a1a1a]">
+                        AUTHENTIC SNEAKERS.<br />
+                        <span class="text-[#8c6b23]">CURATED FOR ELITES.</span>
+                    </h1>
+                    <p class="text-xs sm:text-base text-[#5c5035] font-medium">
+                        Legit-checked grail footwear, delivered nationwide.
+                    </p>
+                </div>
+
+                <!-- Auto-Moving Hero Product Slider -->
+                <div class="w-full md:max-w-md overflow-hidden">
+                    <div id="hero-preview" class="flex gap-3 overflow-x-auto no-scrollbar py-1 scroll-smooth"></div>
+                </div>
+            </div>
+
+            <!-- Trust & Store Policy Banner -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-[#ebd8b0]/60 p-4 rounded-2xl border border-[#dec38e] text-xs">
+                <div class="flex items-center gap-3 p-2">
+                    <div class="p-2.5 bg-[#1a1a1a] text-white rounded-xl">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="font-extrabold text-[#1a1a1a]">Express DTDC Delivery</p>
+                        <p class="text-[11px] text-[#5c5035]">Fast nationwide shipping with real-time tracking</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3 p-2">
+                    <div class="p-2.5 bg-[#1a1a1a] text-white rounded-xl">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="font-extrabold text-[#1a1a1a]">Easy Size Exchange</p>
+                        <p class="text-[11px] text-[#5c5035]">Hassle-free exchange support for sizing & quality</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3 p-2">
+                    <div class="p-2.5 bg-[#1a1a1a] text-white rounded-xl">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="font-extrabold text-[#1a1a1a]">Store Quality Proof</p>
+                        <p class="text-[11px] text-[#5c5035]">OG Box included & DM for live videos</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Brand Filter Bar -->
+            <div class="w-full space-y-2 sm:space-y-3">
+                <span class="text-xs font-bold text-[#7a6b4c]">• FILTER BY BRAND</span>
+                <div id="brand-filters" class="w-full flex gap-2 overflow-x-auto no-scrollbar pb-1"></div>
+            </div>
+
+            <!-- Product Grid: 2 Columns on Mobile -->
+            <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6"></div>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="w-full border-t border-[#e5dcbe] mt-12 py-8 text-center text-xs font-semibold text-[#7a6b4c] space-y-2">
+            <p>🚚 Shipping Partner: Express DTDC Delivery | 🔄 Size Exchange & Return Support Available</p>
+            <p>© 2026 ASIRO ELITE. All Rights Reserved. Verified Authentic Grails.</p>
+        </footer>
+
+    </div>
+
+    <!-- PRODUCT DETAIL MODAL -->
+    <div id="product-modal" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+        <div class="relative w-full max-w-4xl bg-[#f4eee0] rounded-3xl shadow-2xl overflow-hidden my-auto border border-[#dec38e] flex flex-col md:flex-row">
+            
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 z-20 w-9 h-9 bg-[#1a1a1a] text-white rounded-full flex items-center justify-center hover:scale-105 active:scale-95 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+
+            <!-- Modal Left: Image -->
+            <div class="w-full md:w-1/2 bg-[#ebd8b0]/40 p-6 sm:p-10 flex items-center justify-center min-h-[260px]">
+                <img id="modal-image" src="" alt="" class="max-h-72 sm:max-h-80 object-contain drop-shadow-xl" />
+            </div>
+
+            <!-- Modal Right: Content -->
+            <div class="w-full md:w-1/2 p-5 sm:p-8 flex flex-col justify-between space-y-4">
+                <div class="space-y-3">
+                    <span id="modal-badge" class="inline-block text-[10px] font-extrabold tracking-wider uppercase px-3 py-1 bg-[#1a1a1a] text-white rounded-full"></span>
+                    <div>
+                        <h2 id="modal-title" class="text-xl sm:text-3xl font-black text-[#1a1a1a] leading-tight"></h2>
+                    </div>
+                    <p id="modal-price" class="text-2xl sm:text-3xl font-extrabold text-[#1a1a1a]"></p>
+                    
+                    <!-- POINT-WISE DESCRIPTION CONTAINER -->
+                    <div class="space-y-1.5">
+                        <p class="text-[10px] sm:text-[11px] font-black uppercase text-[#1a1a1a] tracking-wider">PRODUCT HIGHLIGHTS</p>
+                        <ul id="modal-description" class="space-y-1.5 text-xs text-[#5c5035] font-medium bg-[#ebd8b0]/40 p-3 rounded-2xl border border-[#dec38e]"></ul>
+                    </div>
+
+                    <!-- SHIPPING & RETURN INFO IN MODAL -->
+                    <div class="space-y-1.5 bg-[#ebd8b0]/70 p-3 rounded-2xl border border-[#dec38e] text-xs">
+                        <div class="flex justify-between border-b border-[#dec38e] pb-1">
+                            <span class="text-[#7a6b4c] font-bold">Shipping Partner:</span>
+                            <span class="font-extrabold text-[#1a1a1a]">Express DTDC Delivery</span>
+                        </div>
+                        <div class="flex justify-between border-b border-[#dec38e] py-1">
+                            <span class="text-[#7a6b4c] font-bold">Return/Exchange:</span>
+                            <span class="font-extrabold text-[#1a1a1a]">Size Exchange Support</span>
+                        </div>
+                        <div class="flex justify-between pt-1">
+                            <span class="text-[#7a6b4c] font-bold">Quality Proof:</span>
+                            <span class="font-extrabold text-[#1a1a1a]">OG Box & Live DM Video</span>
+                        </div>
+                    </div>
+
+                    <!-- SELECT SIZE -->
+                    <div class="space-y-2 pt-1">
+                        <p class="text-[10px] sm:text-[11px] font-black uppercase text-[#1a1a1a] tracking-wider">SELECT SIZE (EU)</p>
+                        <div id="modal-sizes" class="flex flex-wrap gap-2"></div>
+                    </div>
+                </div>
+
+                <button onclick="addToCart()" class="w-full bg-[#1a1a1a] hover:bg-black text-white font-extrabold text-xs uppercase tracking-widest py-3.5 rounded-2xl shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-2 mt-4">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                    </svg>
+                    ADD TO BAG & CHECKOUT
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CART SLIDE-OVER DRAWER -->
+    <div id="cart-drawer" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex justify-end">
+        <div class="w-full max-w-md bg-[#f4eee0] h-full shadow-2xl flex flex-col justify-between border-l border-[#dec38e] p-5 sm:p-6 overflow-y-auto">
+            
+            <div class="space-y-5">
+                <!-- Cart Header -->
+                <div class="flex items-center justify-between border-b border-[#e5dcbe] pb-4">
+                    <div class="flex items-center gap-2">
+                        <h2 class="text-xl font-black text-[#1a1a1a]">YOUR BAG</h2>
+                        <span id="drawer-cart-count" class="text-xs font-bold bg-[#1a1a1a] text-white px-2 py-0.5 rounded-full">0</span>
+                    </div>
+                    <button onclick="closeCartDrawer()" class="p-2 bg-[#ebd8b0] text-[#1a1a1a] rounded-full hover:bg-[#d8ccaa] transition-all">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Cart Items List Container -->
+                <div id="cart-items-list" class="space-y-3"></div>
+            </div>
+
+            <!-- Cart Footer Summary -->
+            <div class="border-t border-[#e5dcbe] pt-4 space-y-3">
+                <div class="flex justify-between text-sm font-extrabold text-[#1a1a1a]">
+                    <span>TOTAL PRICE:</span>
+                    <span id="cart-total-price">₹0</span>
+                </div>
+                <p class="text-[11px] text-[#5c5035] font-semibold text-center">🚚 Includes Free Nationwide Express DTDC Shipping</p>
+                <button onclick="checkoutViaWhatsApp()" class="w-full bg-[#1a1a1a] hover:bg-black text-white font-extrabold text-xs uppercase tracking-widest py-4 rounded-2xl shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-2">
+                    PROCEED TO CHECKOUT
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JavaScript Store Logic -->
+    <script>
+        const PRODUCTS = [
+            {
+                name: "PUMA SPEEDCAT OG BLACK",
+                price: 2399,
+                image: "https://i.postimg.cc/RVVbFT7F/image.png",
+                badge: "GRAIL",
+                sizes: [40, 41, 42, 43, 44],
+                description: [
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "Same quality as retail stores",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "ADIDAS ORIGINAL MARRY JANE LEATHER JANE 2026",
+                price: 2399,
+                image: "https://i.postimg.cc/1tKKKznP/image.png",
+                badge: "HYPED",
+                sizes: [36, 37, 38, 39, 40],
+                description: [
+                    "PRICE DROPPED • SHOWROOM QUALITY",
+                    "Top high-end 1:1 mirror copy (Store quality)",
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "PUMA SPEEDCAT RED WHITE",
+                price: 2399,
+                image: "https://i.postimg.cc/sXL9gpsH/image.png",
+                badge: "HYPE",
+                sizes: [40, 41, 42, 43, 44, 45],
+                description: [
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "Same quality as retail stores",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "NIKE SB DUNK CHINESE DRAGON NEW YEAR PUPPET 2024",
+                price: 2499,
+                image: "https://i.postimg.cc/G3JGNwsS/image.png",
+                badge: "TRENDING",
+                sizes: [40, 41, 42, 43, 44, 45],
+                description: [
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "Same quality as retail stores",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "ONITSUKA TIGER MEXICO SD CANYON BROWN",
+                price: 2599,
+                image: "https://i.postimg.cc/htcgvy8P/image.png",
+                badge: "GRAIL",
+                sizes: [40, 41, 42, 43, 44],
+                description: [
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "Same quality as retail stores",
+                    "If you need more photos, DM me"
+                ]
+            }, 
+            {
+                name: "NIKE AIRFORCE X BAPE STA 2026",
+                price: 2599,
+                image: "https://i.postimg.cc/HLZ1nTz3/image.png",
+                badge: "TRENDING",
+                sizes: [40, 41, 42, 43, 44],
+                description: [
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "Same quality as retail stores",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "AIR JORDANS RETRO 1 LOW TRAVIS X STUSSY",
+                price: 2699,
+                image: "https://i.postimg.cc/zvPykmq0/image.png",
+                badge: "TRENDING",
+                sizes: [40, 41, 42, 43, 44, 45],
+                description: [
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "Same quality as retail stores",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "NIKE KILLSHOT 2",
+                price: 2399,
+                image: "https://i.postimg.cc/Nf36hTwk/image.png",
+                badge: "GRAIL",
+                sizes: [40, 41, 42, 43, 44],
+                description: [
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "Same quality as retail stores",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "CONVERSE CHUCK SKETCH HI ROYAL BLUE",
+                price: 2799,
+                image: "https://i.postimg.cc/3NSCPbFf/image.png",
+                badge: "GRAIL",
+                sizes: [40, 41, 42, 43, 44],
+                description: [
+                    "Semi U/A Quality • Showroom Quality Guaranteed",
+                    "Top high-end 1:1 mirror copy (Store quality)",
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "NIKE AIRFORCE ONE X MLB X NEW YORK YANKEES 2026",
+                price: 2799,
+                image: "https://i.postimg.cc/zD0jbVYT/image.png",
+                badge: "TRENDING",
+                sizes: [40, 41, 42, 43, 44, 45],
+                description: [
+                    "Semi U/A Quality • Showroom Quality Guaranteed",
+                    "Top high-end 1:1 mirror copy (Store quality)",
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "NIKE SB DUNK SUPREME ZEBRA 2025",
+                price: 2299,
+                image: "https://i.postimg.cc/bvx0zvRm/image.png",
+                badge: "HYPE",
+                sizes: [40, 41, 42, 43, 44, 45],
+                description: [
+                    "BACK IN STOCK ON HUGE DEMAND",
+                    "Showroom Quality Guaranteed",
+                    "Top high-end 1:1 mirror copy (Store quality)",
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "PUMA INHALE ASAP PURPLE RED EDTN",
+                price: 2999,
+                image: "https://i.postimg.cc/B6JTtGhz/image.png",
+                badge: "GRAIL",
+                sizes: [40, 41, 42, 43, 44],
+                description: [
+                    "AT BEST PRICE • Semi U/A Quality",
+                    "Showroom Quality Guaranteed",
+                    "Top high-end 1:1 mirror copy (Store quality)",
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "NIKE SHOX SILVER BLACK RED",
+                price: 2499,
+                image: "https://i.postimg.cc/V64jCHpD/image.png",
+                badge: "TRENDING",
+                sizes: [40, 41, 42, 43, 44, 45],
+                description: [
+                    "Showroom Quality Guaranteed",
+                    "Top high-end 1:1 mirror copy (Store quality)",
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "NIKE SHOX SILVER WHITE",
+                price: 2499,
+                image: "https://i.postimg.cc/MHFVsfWf/image.png",
+                badge: "TRENDING",
+                sizes: [40, 41, 42, 43, 44, 45],
+                description: [
+                    "Showroom Quality Guaranteed",
+                    "Top high-end 1:1 mirror copy (Store quality)",
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "NIKE SHOX SILVER BROWN",
+                price: 2499,
+                image: "https://i.postimg.cc/t4PW5gww/image.png",
+                badge: "TRENDING",
+                sizes: [40, 41, 42, 43, 44, 45],
+                description: [
+                    "Showroom Quality Guaranteed",
+                    "Top high-end 1:1 mirror copy (Store quality)",
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "NIKE SHOX SILVER ROYAL BLUE",
+                price: 2499,
+                image: "https://i.postimg.cc/xd3mw4fS/image.png",
+                badge: "TRENDING",
+                sizes: [40, 41, 42, 43, 44, 45],
+                description: [
+                    "Showroom Quality Guaranteed",
+                    "Top high-end 1:1 mirror copy (Store quality)",
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "NIKE NOCTA X P-6000 BLACK 2026",
+                price: 2999,
+                image: "https://i.postimg.cc/ydfZd33c/image.png",
+                badge: "HYPED",
+                sizes: [40, 41, 42, 43, 44, 45],
+                description: [
+                    "FIRST TIME IN INDIA",
+                    "Showroom Quality Guaranteed",
+                    "Top high-end 1:1 mirror copy (Store quality)",
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "ADIDAS ORIGINALS SUPERSTAR SUEDE TAN",
+                price: 2699,
+                image: "https://i.postimg.cc/rFRrVmV9/image.png",
+                badge: "HYPE",
+                sizes: [40, 41, 42, 43, 44],
+                description: [
+                    "NEW IN THE HOUSE • Semi U/A Quality",
+                    "Showroom Quality Guaranteed",
+                    "Top high-end 1:1 mirror copy (Store quality)",
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "VANS OLD SKOOL KNU METALLIC SKY",
+                price: 2399,
+                image: "https://i.postimg.cc/RZcJtDn5/image.png",
+                badge: "HYPED",
+                sizes: [40, 41, 42, 43, 44],
+                description: [
+                    "FIRST TIME IN INDIA • Semi U/A Quality",
+                    "Showroom Quality Guaranteed",
+                    "Top high-end 1:1 mirror copy (Store quality)",
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "ADIDAS ORIGINALS SUPERSTAR 2026 CORDUROY SKY",
+                price: 2399,
+                image: "https://i.postimg.cc/zf8bFFnx/image.png",
+                badge: "TRENDING",
+                sizes: [40, 41, 42, 43, 44],
+                description: [
+                    "NEW IN THE HOUSE • Semi U/A Quality",
+                    "Showroom Quality Guaranteed",
+                    "Top high-end 1:1 mirror copy (Store quality)",
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "PUMA SPEEDCAT BELLA V2 PINK WHITE",
+                price: 2075,
+                image: "https://i.postimg.cc/tTgsLRvd/image.png",
+                badge: "HYPE",
+                sizes: [36, 37, 38, 39, 40],
+                description: [
+                    "Legit Semi U/A Quality • Showroom Quality Guaranteed",
+                    "Top high-end 1:1 mirror copy (Store quality)",
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "NIKE P-6000 TRAINER METALLIC BLUE TICK",
+                price: 2299,
+                image: "https://i.postimg.cc/D0J8wjTy/image.png",
+                badge: "TRENDING",
+                sizes: [36, 37, 38, 39, 40],
+                description: [
+                    "FOR GIRLS ON HUGE DEMAND",
+                    "Showroom Quality Guaranteed",
+                    "Top high-end 1:1 mirror copy (Store quality)",
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "ADIDAS ORIGINALS SUPERSTAR DENIM SKY SECOND GENERATION 2025",
+                price: 2249,
+                image: "https://i.postimg.cc/QNwFy3QD/image.png",
+                badge: "HYPE",
+                sizes: [40, 41, 42, 43, 44],
+                description: [
+                    "SECOND GENERATION 2025",
+                    "Showroom Quality Guaranteed",
+                    "Top high-end 1:1 mirror copy (Store quality)",
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "ASICS GEL NYC KAYANO KITH RONNIE BEIGE AQUA",
+                price: 2499,
+                image: "https://i.postimg.cc/VLtJyVgW/image.png",
+                badge: "GRAIL",
+                sizes: [40, 41, 42, 43, 44, 45],
+                description: [
+                    "Showroom Quality Guaranteed",
+                    "Top high-end 1:1 mirror copy (Store quality)",
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "NIKE SB DUNK WHAT THE DUCK",
+                price: 2399,
+                image: "https://i.postimg.cc/MpbXHfhw/image.png",
+                badge: "GRAIL",
+                sizes: [40, 41, 42, 43, 44, 45],
+                description: [
+                    "Showroom Quality Guaranteed",
+                    "Top high-end 1:1 mirror copy (Store quality)",
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "NIKE P-6000 TRAINER CUSTOM PINK",
+                price: 2399,
+                image: "https://i.postimg.cc/KYGjMv2D/image.png",
+                badge: "TRENDING",
+                sizes: [36, 37, 38, 39, 40],
+                description: [
+                    "Showroom Quality Guaranteed",
+                    "Top high-end 1:1 mirror copy (Store quality)",
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "ADIDAS ORIGINALS SUPERSTAR 2nd GENERATION DARK GREEN",
+                price: 2249,
+                image: "https://i.postimg.cc/xd6CyDjY/image.png",
+                badge: "TRENDING",
+                sizes: [40, 41, 42, 43, 44],
+                description: [
+                    "NEW IN THE HOUSE • Semi U/A Quality",
+                    "Showroom Quality Guaranteed",
+                    "Top high-end 1:1 mirror copy (Store quality)",
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "ADIDAS ORIGINALS SAMBA BLACK SILVER RHINESTONES",
+                price: 2399,
+                image: "https://i.postimg.cc/kG8xDXNP/image.png",
+                badge: "HYPED",
+                sizes: [36, 37, 38, 39, 40],
+                description: [
+                    "FIRST TIME IN INDIA • FOR GIRLS",
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "Same quality as retail stores",
+                    "If you need more photos, DM me"
+                ]
+            }
+        ];
+
+        const BRANDS = ["ALL COLLECTION", "NIKE", "ADIDAS", "ASICS", "PUMA", "ONITSUKA", "VANS", "CONVERSE"];
+
+        let selectedBrand = "ALL COLLECTION";
+        let cart = [];
+        let selectedSize = null;
+        let activeModalIndex = null;
+        let autoScrollTimer = null;
+
+        function renderBrandFilters() {
+            const container = document.getElementById('brand-filters');
+            container.innerHTML = BRANDS.map(brand => `
+                <button onclick="setBrand('${brand}')" class="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl text-[11px] sm:text-xs font-extrabold whitespace-nowrap transition-all ${
+                    selectedBrand === brand ? 'bg-[#1a1a1a] text-white shadow-sm' : 'bg-[#e5dcbe] text-[#4a422e] hover:bg-[#d8ccaa]'
+                }">
+                    ${brand}
+                </button>
+            `).join('');
+        }
+
+        function setBrand(brand) {
+            selectedBrand = brand;
+            renderBrandFilters();
+            renderProducts();
+        }
+
+        function renderHeroPreview() {
+            const container = document.getElementById('hero-preview');
+            const loopList = [...PRODUCTS, ...PRODUCTS, ...PRODUCTS];
+
+            container.innerHTML = loopList.map((p, index) => {
+                const originalIndex = index % PRODUCTS.length;
+                return `
+                    <div onclick="openModal(${originalIndex})" class="min-w-[130px] sm:min-w-[150px] bg-[#f4eee0] p-2.5 sm:p-3 rounded-xl border border-[#dec38e] cursor-pointer hover:border-[#1a1a1a] transition-all flex-shrink-0">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-20 sm:h-24 object-contain mb-1 pointer-events-none" />
+                        <p class="text-[11px] sm:text-xs font-extrabold line-clamp-1">${p.name}</p>
+                        <p class="text-[11px] sm:text-xs font-bold text-[#1a1a1a]">₹${p.price.toLocaleString('en-IN')}</p>
+                    </div>
+                `;
+            }).join('');
+
+            startHeroAutoScroll();
+        }
+
+        function startHeroAutoScroll() {
+            const container = document.getElementById('hero-preview');
+            if (!container) return;
+
+            let isHovered = false;
+            container.onmouseenter = () => isHovered = true;
+            container.onmouseleave = () => isHovered = false;
+            container.ontouchstart = () => isHovered = true;
+            container.ontouchend = () => isHovered = false;
+
+            if (autoScrollTimer) clearInterval(autoScrollTimer);
+
+            autoScrollTimer = setInterval(() => {
+                if (!isHovered && container) {
+                    const maxScroll = container.scrollWidth - container.clientWidth;
+                    // Guard: only execute auto-scroll if container actually overflows
+                    if (maxScroll > 10) {
+                        container.scrollLeft += 1;
+                        if (container.scrollLeft >= maxScroll - 5) {
+                            container.scrollLeft = 0;
+                        }
+                    }
+                }
+            }, 25);
+        }
+
+        function renderProducts() {
+            const container = document.getElementById('product-grid');
+            
+            const displayList = selectedBrand === "ALL COLLECTION" 
+                ? PRODUCTS.map((p, origIdx) => ({ ...p, origIdx }))
+                : PRODUCTS
+                    .map((p, origIdx) => ({ ...p, origIdx }))
+                    .filter(p => {
+                        const filterKey = selectedBrand.toUpperCase();
+                        const nameUpper = p.name.toUpperCase();
+                        if (filterKey === "ASICS" && (nameUpper.includes("ONITSUKA") || nameUpper.includes("ASICS"))) return true;
+                        if (filterKey === "NIKE" && (nameUpper.includes("NIKE") || nameUpper.includes("JORDAN") || nameUpper.includes("AIRFORCE"))) return true;
+                        return nameUpper.includes(filterKey);
+                    });
+
+            if (displayList.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full py-12 text-center text-[#7a6b4c] font-bold">
+                        No products currently available for ${selectedBrand}.
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = displayList.map(p => `
+                <div onclick="openModal(${p.origIdx})" class="w-full bg-[#fcefd2] rounded-xl sm:rounded-2xl p-2.5 sm:p-4 border border-[#e5dcbe] shadow-sm flex flex-col justify-between space-y-2 sm:space-y-4 cursor-pointer hover:shadow-md transition-all">
+                    
+                    <div class="relative w-full bg-[#f4eee0] rounded-lg sm:rounded-xl p-2 flex items-center justify-center aspect-[3/4] overflow-hidden">
+                        <span class="absolute top-1.5 left-1.5 sm:top-3 sm:left-3 z-10 text-[8px] sm:text-[10px] font-black uppercase bg-[#1a1a1a] text-white px-1.5 sm:px-2 py-0.5 rounded-md">
+                            ${p.badge}
+                        </span>
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-contain hover:scale-105 transition-transform duration-300" />
+                    </div>
+
+                    <div class="space-y-0.5 sm:space-y-1">
+                        <h3 class="text-xs sm:text-base font-black tracking-tight line-clamp-2 leading-tight">${p.name}</h3>
+                        <p class="text-sm sm:text-xl font-extrabold text-[#1a1a1a] pt-0.5">₹${p.price.toLocaleString('en-IN')}</p>
+                    </div>
+
+                    <button onclick="event.stopPropagation(); openModal(${p.origIdx})" class="w-full bg-[#1a1a1a] hover:bg-black text-white font-extrabold text-[10px] sm:text-xs uppercase py-2 sm:py-3 rounded-lg sm:rounded-xl transition-transform active:scale-95">
+                        ADD TO BAG / DETAILS
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function openModal(index) {
+            activeModalIndex = index;
+            const p = PRODUCTS[index];
+            if (!p) return;
+
+            document.getElementById('modal-image').src = p.image;
+            document.getElementById('modal-badge').innerText = p.badge;
+            document.getElementById('modal-title').innerText = p.name;
+            document.getElementById('modal-price').innerText = `₹${p.price.toLocaleString('en-IN')}`;
+
+            const descContainer = document.getElementById('modal-description');
+            if (Array.isArray(p.description)) {
+                descContainer.innerHTML = p.description.map(pt => `
+                    <li class="flex items-start gap-2">
+                        <span class="text-[#8c6b23] font-black text-sm leading-none">•</span>
+                        <span>${pt}</span>
+                    </li>
+                `).join('');
+            } else {
+                descContainer.innerHTML = `
+                    <li class="flex items-start gap-2">
+                        <span class="text-[#8c6b23] font-black text-sm leading-none">•</span>
+                        <span>${p.description}</span>
+                    </li>
+                `;
+            }
+
+            selectedSize = p.sizes[0];
+            renderSizes(p.sizes);
+
+            document.getElementById('product-modal').classList.remove('hidden');
+        }
+
+        function renderSizes(sizes) {
+            const container = document.getElementById('modal-sizes');
+            container.innerHTML = sizes.map(size => `
+                <button onclick="selectSize(${size})" class="px-3 py-1.5 sm:px-3.5 sm:py-2 text-[11px] sm:text-xs font-extrabold rounded-xl border transition-all ${
+                    selectedSize === size 
+                        ? 'bg-[#1a1a1a] text-white border-[#1a1a1a] shadow-md' 
+                        : 'bg-[#ebd8b0] text-[#1a1a1a] border-[#dec38e] hover:bg-[#d8ccaa]'
+                }">
+                    EU ${size}
+                </button>
+            `).join('');
+        }
+
+        function selectSize(size) {
+            selectedSize = size;
+            if (activeModalIndex !== null && PRODUCTS[activeModalIndex]) {
+                renderSizes(PRODUCTS[activeModalIndex].sizes);
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('product-modal').classList.add('hidden');
+        }
+
+        function addToCart() {
+            if (activeModalIndex === null || !PRODUCTS[activeModalIndex]) return;
+            const product = PRODUCTS[activeModalIndex];
+
+            cart.push({
+                ...product,
+                selectedSize: selectedSize || product.sizes[0]
+            });
+
+            updateCartUI();
+            closeModal();
+            openCartDrawer();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const cartCountBadge = document.getElementById('cart-count');
+            const drawerCountBadge = document.getElementById('drawer-cart-count');
+            const cartItemsList = document.getElementById('cart-items-list');
+            const cartTotalPrice = document.getElementById('cart-total-price');
+
+            const totalItems = cart.length;
+            drawerCountBadge.innerText = totalItems;
+
+            if (totalItems > 0) {
+                cartCountBadge.innerText = totalItems;
+                cartCountBadge.classList.remove('hidden');
+            } else {
+                cartCountBadge.classList.add('hidden');
+            }
+
+            const totalSum = cart.reduce((acc, item) => acc + item.price, 0);
+            cartTotalPrice.innerText = `₹${totalSum.toLocaleString('en-IN')}`;
+
+            if (cart.length === 0) {
+                cartItemsList.innerHTML = `
+                    <div class="text-center py-12 space-y-2">
+                        <p class="text-sm font-bold text-[#5c5035]">Your bag is empty</p>
+                        <p class="text-xs text-[#7a6b4c]">Add items from the store catalog to continue.</p>
+                    </div>
+                `;
+            } else {
+                cartItemsList.innerHTML = cart.map((item, idx) => `
+                    <div class="flex items-center justify-between bg-[#fcefd2] p-3 rounded-2xl border border-[#e5dcbe]">
+                        <div class="flex items-center gap-3">
+                            <div class="w-16 h-16 bg-[#f4eee0] rounded-xl p-1 flex items-center justify-center">
+                                <img src="${item.image}" alt="${item.name}" class="max-h-full object-contain" />
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-extrabold text-[#1a1a1a] line-clamp-1">${item.name}</h4>
+                                <p class="text-[11px] font-bold text-[#8c6b23]">EU ${item.selectedSize}</p>
+                                <p class="text-xs font-black text-[#1a1a1a]">₹${item.price.toLocaleString('en-IN')}</p>
+                            </div>
+                        </div>
+                        <button onclick="removeFromCart(${idx})" class="p-2 text-[#d9381e] hover:bg-[#ebd8b0] rounded-xl transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                        </button>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function openCartDrawer() {
+            updateCartUI();
+            document.getElementById('cart-drawer').classList.remove('hidden');
+        }
+
+        function closeCartDrawer() {
+            document.getElementById('cart-drawer').classList.add('hidden');
+        }
+
+        function checkoutViaWhatsApp() {
+            if (cart.length === 0) {
+                alert("Your bag is empty!");
+                return;
+            }
+            let msg = "Hello ASIRO ELITE! I want to order:\n\n";
+            cart.forEach((item, index) => {
+                msg += `${index + 1}. ${item.name} - Size: EU ${item.selectedSize} - ₹${item.price}\n`;
+            });
+            const total = cart.reduce((acc, item) => acc + item.price, 0);
+            msg += `\nTotal Amount: ₹${total.toLocaleString('en-IN')}\nPlease confirm my order!`;
+            
+            // Replace with your WhatsApp phone number (country code + number, no + or spaces)
+            const phone = "919000000000"; 
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        renderBrandFilters();
+        renderHeroPreview();
+        renderProducts();
+        updateCartUI();
+    </script>
+</body>
+</html>
