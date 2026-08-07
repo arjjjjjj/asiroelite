@@ -117,7 +117,7 @@
                 <div id="brand-filters" class="w-full flex gap-2 overflow-x-auto no-scrollbar pb-1"></div>
             </div>
 
-            <!-- Product Grid: 2 Columns on Mobile -->
+            <!-- Product Grid -->
             <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6"></div>
 
         </main>
@@ -134,19 +134,16 @@
     <div id="product-modal" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
         <div class="relative w-full max-w-4xl bg-[#f4eee0] rounded-3xl shadow-2xl overflow-hidden my-auto border border-[#dec38e] flex flex-col md:flex-row">
             
-            <!-- Close Button -->
             <button onclick="closeModal()" class="absolute top-4 right-4 z-20 w-9 h-9 bg-[#1a1a1a] text-white rounded-full flex items-center justify-center hover:scale-105 active:scale-95 transition-transform">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
 
-            <!-- Modal Left: Image -->
             <div class="w-full md:w-1/2 bg-[#ebd8b0]/40 p-6 sm:p-10 flex items-center justify-center min-h-[260px]">
                 <img id="modal-image" src="" alt="" class="max-h-72 sm:max-h-80 object-contain drop-shadow-xl" />
             </div>
 
-            <!-- Modal Right: Content -->
             <div class="w-full md:w-1/2 p-5 sm:p-8 flex flex-col justify-between space-y-4">
                 <div class="space-y-3">
                     <span id="modal-badge" class="inline-block text-[10px] font-extrabold tracking-wider uppercase px-3 py-1 bg-[#1a1a1a] text-white rounded-full"></span>
@@ -155,13 +152,11 @@
                     </div>
                     <p id="modal-price" class="text-2xl sm:text-3xl font-extrabold text-[#1a1a1a]"></p>
                     
-                    <!-- POINT-WISE DESCRIPTION CONTAINER -->
                     <div class="space-y-1.5">
                         <p class="text-[10px] sm:text-[11px] font-black uppercase text-[#1a1a1a] tracking-wider">PRODUCT HIGHLIGHTS</p>
                         <ul id="modal-description" class="space-y-1.5 text-xs text-[#5c5035] font-medium bg-[#ebd8b0]/40 p-3 rounded-2xl border border-[#dec38e]"></ul>
                     </div>
 
-                    <!-- SHIPPING & RETURN INFO IN MODAL -->
                     <div class="space-y-1.5 bg-[#ebd8b0]/70 p-3 rounded-2xl border border-[#dec38e] text-xs">
                         <div class="flex justify-between border-b border-[#dec38e] pb-1">
                             <span class="text-[#7a6b4c] font-bold">Shipping Partner:</span>
@@ -177,7 +172,6 @@
                         </div>
                     </div>
 
-                    <!-- SELECT SIZE -->
                     <div class="space-y-2 pt-1">
                         <p class="text-[10px] sm:text-[11px] font-black uppercase text-[#1a1a1a] tracking-wider">SELECT SIZE (EU)</p>
                         <div id="modal-sizes" class="flex flex-wrap gap-2"></div>
@@ -199,7 +193,6 @@
         <div class="w-full max-w-md bg-[#f4eee0] h-full shadow-2xl flex flex-col justify-between border-l border-[#dec38e] p-5 sm:p-6 overflow-y-auto">
             
             <div class="space-y-5">
-                <!-- Cart Header -->
                 <div class="flex items-center justify-between border-b border-[#e5dcbe] pb-4">
                     <div class="flex items-center gap-2">
                         <h2 class="text-xl font-black text-[#1a1a1a]">YOUR BAG</h2>
@@ -212,22 +205,106 @@
                     </button>
                 </div>
 
-                <!-- Cart Items List Container -->
                 <div id="cart-items-list" class="space-y-3"></div>
             </div>
 
-            <!-- Cart Footer Summary -->
             <div class="border-t border-[#e5dcbe] pt-4 space-y-3">
                 <div class="flex justify-between text-sm font-extrabold text-[#1a1a1a]">
                     <span>TOTAL PRICE:</span>
                     <span id="cart-total-price">₹0</span>
                 </div>
                 <p class="text-[11px] text-[#5c5035] font-semibold text-center">🚚 Includes Free Nationwide Express DTDC Shipping</p>
-                <button onclick="checkoutViaWhatsApp()" class="w-full bg-[#1a1a1a] hover:bg-black text-white font-extrabold text-xs uppercase tracking-widest py-4 rounded-2xl shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-2">
+                <button onclick="openAddressModal()" class="w-full bg-[#1a1a1a] hover:bg-black text-white font-extrabold text-xs uppercase tracking-widest py-4 rounded-2xl shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-2">
                     PROCEED TO CHECKOUT
                 </button>
             </div>
 
+        </div>
+    </div>
+
+    <!-- ADDRESS & PAYMENT DETAILS MODAL -->
+    <div id="address-modal" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+        <div class="relative w-full max-w-lg bg-[#f4eee0] rounded-3xl shadow-2xl p-6 border border-[#dec38e] space-y-4 my-auto max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center border-b border-[#e5dcbe] pb-3">
+                <div>
+                    <h3 class="text-lg font-black text-[#1a1a1a]">CHECKOUT & PAYMENT</h3>
+                    <p class="text-[11px] text-[#7a6b4c] font-semibold">Complete delivery info and UPI payment to place order</p>
+                </div>
+                <button onclick="closeAddressModal()" class="p-1.5 bg-[#ebd8b0] text-[#1a1a1a] rounded-full hover:bg-[#d8ccaa] transition-all">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <form id="address-form" onsubmit="confirmOrderAndRedirect(event)" class="space-y-4">
+                <!-- Delivery Details Section -->
+                <div class="space-y-3">
+                    <h4 class="text-xs font-black uppercase tracking-wider text-[#8c6b23]">• 1. DELIVERY ADDRESS</h4>
+                    <div>
+                        <label class="block text-xs font-extrabold text-[#1a1a1a] mb-1">FULL NAME *</label>
+                        <input type="text" id="cust-name" required placeholder="e.g. Rahul Sharma" class="w-full px-3.5 py-2.5 bg-[#fcefd2] border border-[#dec38e] rounded-xl text-xs font-semibold focus:outline-none focus:border-[#1a1a1a]" />
+                    </div>
+                    <div>
+                        <label class="block text-xs font-extrabold text-[#1a1a1a] mb-1">PHONE / WHATSAPP NUMBER *</label>
+                        <input type="tel" id="cust-phone" required placeholder="e.g. 8590614248" class="w-full px-3.5 py-2.5 bg-[#fcefd2] border border-[#dec38e] rounded-xl text-xs font-semibold focus:outline-none focus:border-[#1a1a1a]" />
+                    </div>
+                    <div>
+                        <label class="block text-xs font-extrabold text-[#1a1a1a] mb-1">COMPLETE STREET ADDRESS *</label>
+                        <textarea id="cust-address" required rows="2" placeholder="House/Flat No., Street Name, Area/Landmark" class="w-full px-3.5 py-2.5 bg-[#fcefd2] border border-[#dec38e] rounded-xl text-xs font-semibold focus:outline-none focus:border-[#1a1a1a]"></textarea>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-extrabold text-[#1a1a1a] mb-1">CITY / STATE *</label>
+                            <input type="text" id="cust-city" required placeholder="e.g. Mumbai, MH" class="w-full px-3.5 py-2.5 bg-[#fcefd2] border border-[#dec38e] rounded-xl text-xs font-semibold focus:outline-none focus:border-[#1a1a1a]" />
+                        </div>
+                        <div>
+                            <label class="block text-xs font-extrabold text-[#1a1a1a] mb-1">PINCODE *</label>
+                            <input type="text" id="cust-pincode" required placeholder="e.g. 400001" class="w-full px-3.5 py-2.5 bg-[#fcefd2] border border-[#dec38e] rounded-xl text-xs font-semibold focus:outline-none focus:border-[#1a1a1a]" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Options Section -->
+                <div class="space-y-3 pt-2 border-t border-[#e5dcbe]">
+                    <h4 class="text-xs font-black uppercase tracking-wider text-[#8c6b23]">• 2. UPI PAYMENT DETAILS</h4>
+                    <div class="bg-[#ebd8b0] p-3.5 rounded-2xl border border-[#dec38e] space-y-2 text-xs">
+                        <div class="flex justify-between items-center pb-1.5 border-b border-[#dec38e]">
+                            <span class="font-extrabold text-[#1a1a1a]">UPI Number (Primary):</span>
+                            <span class="font-black text-[#d9381e] bg-[#f4eee0] px-2 py-0.5 rounded-lg border border-[#dec38e]">8590614248</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-1.5 border-b border-[#dec38e]">
+                            <span class="font-extrabold text-[#1a1a1a]">UPI ID 1:</span>
+                            <span class="font-black text-[#1a1a1a]">arjunajujr03@oksbi</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-extrabold text-[#1a1a1a]">UPI ID 2:</span>
+                            <span class="font-black text-[#1a1a1a]">arjunj01@pthdfc</span>
+                        </div>
+                    </div>
+
+                    <!-- Screenshot Upload -->
+                    <div>
+                        <label class="block text-xs font-extrabold text-[#1a1a1a] mb-1">UPLOAD PAYMENT SCREENSHOT</label>
+                        <input type="file" id="cust-screenshot" accept="image/*" class="w-full px-3 py-2 bg-[#fcefd2] border border-[#dec38e] rounded-xl text-xs font-semibold file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-black file:bg-[#1a1a1a] file:text-white hover:file:bg-black cursor-pointer" />
+                    </div>
+
+                    <!-- WhatsApp Help Box -->
+                    <a href="https://wa.me/918590614248?text=Hello%20ASIRO%20ELITE!%20I%20am%20facing%20an%20issue%20with%20my%20order/payment." target="_blank" class="flex items-center justify-between p-3 bg-[#e5dcbe]/70 hover:bg-[#e5dcbe] rounded-2xl border border-[#dec38e] transition-all group">
+                        <div class="flex items-center gap-2">
+                            <svg class="w-4 h-4 text-[#25D366]" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12.031 2c-5.514 0-9.999 4.486-9.999 10.001 0 1.765.459 3.487 1.332 5.006l-1.364 4.993 5.111-1.34c1.468.8 3.123 1.222 4.92 1.222 5.514 0 9.999-4.486 9.999-10.001s-4.485-10.001-9.999-10.001zm5.95 14.182c-.252.708-1.261 1.341-1.74 1.385-.453.041-1.042.186-3.376-.731-2.836-1.114-4.636-4.004-4.777-4.195-.141-.191-1.149-1.53-1.149-2.92 0-1.391.731-2.072 1.002-2.353.271-.281.591-.352.788-.352.197 0 .394.002.563.01.18.008.423-.068.662.507.252.607.859 2.099.933 2.25.074.151.123.328.024.525-.098.197-.148.319-.295.492-.148.173-.311.386-.443.518-.148.148-.302.311-.131.605.172.293.763 1.26 1.637 2.039 1.125.999 2.072 1.309 2.365 1.457.293.148.468.123.64-.074.172-.197.738-.861.933-1.157.197-.295.394-.246.662-.148.271.098 1.722.812 2.017.96.295.148.492.222.563.344.07.123.07.708-.182 1.416z"/>
+                            </svg>
+                            <span class="text-xs font-extrabold text-[#1a1a1a]">Facing issues? Chat with us on WhatsApp</span>
+                        </div>
+                        <span class="text-xs font-black text-[#8c6b23] group-hover:translate-x-0.5 transition-transform">→</span>
+                    </a>
+                </div>
+
+                <button type="submit" class="w-full bg-[#1a1a1a] hover:bg-black text-white font-extrabold text-xs uppercase tracking-widest py-4 rounded-2xl shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-2 mt-3">
+                    CONFIRM & ORDER ON WHATSAPP
+                </button>
+            </form>
         </div>
     </div>
 
@@ -297,7 +374,7 @@
                     "Free Shipping via Express DTDC Delivery",
                     "Includes Original (OG) Box",
                     "Same quality as retail stores",
-                    "If you need more photos, DM "
+                    "If you need more photos, DM me"
                 ]
             }, 
             {
@@ -687,9 +764,12 @@
 
             autoScrollTimer = setInterval(() => {
                 if (!isHovered && container) {
-                    container.scrollLeft += 1;
-                    if (container.scrollLeft >= (container.scrollWidth - container.clientWidth - 5)) {
-                        container.scrollLeft = 0;
+                    const maxScroll = container.scrollWidth - container.clientWidth;
+                    if (maxScroll > 10) {
+                        container.scrollLeft += 1;
+                        if (container.scrollLeft >= maxScroll - 5) {
+                            container.scrollLeft = 0;
+                        }
                     }
                 }
             }, 25);
@@ -875,28 +955,64 @@
             document.getElementById('cart-drawer').classList.add('hidden');
         }
 
-        function checkoutViaWhatsApp() {
+        function openAddressModal() {
             if (cart.length === 0) {
-                alert("Your bag is empty!");
+                alert("Your bag is empty! Add items to continue.");
                 return;
             }
+            closeCartDrawer();
+            document.getElementById('address-modal').classList.remove('hidden');
+        }
+
+        function closeAddressModal() {
+            document.getElementById('address-modal').classList.add('hidden');
+        }
+
+        function confirmOrderAndRedirect(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('cust-name').value.trim();
+            const phone = document.getElementById('cust-phone').value.trim();
+            const address = document.getElementById('cust-address').value.trim();
+            const city = document.getElementById('cust-city').value.trim();
+            const pincode = document.getElementById('cust-pincode').value.trim();
+            const screenshotInput = document.getElementById('cust-screenshot');
+            const hasScreenshot = screenshotInput.files && screenshotInput.files.length > 0;
+
             let msg = "Hello ASIRO ELITE! I want to order:\n\n";
             cart.forEach((item, index) => {
-                msg += `${index + 1}. ${item.name} - Size: EU ${item.selectedSize} - ₹${item.price}\n`;
+                msg += `${index + 1}. ${item.name} - Size: EU ${item.selectedSize} - ₹${item.price.toLocaleString('en-IN')}\n`;
             });
+
             const total = cart.reduce((acc, item) => acc + item.price, 0);
-            msg += `\nTotal Amount: ₹${total.toLocaleString('en-IN')}\nPlease confirm my order!`;
-            
-            // Replace with your WhatsApp phone number (country code + number, no + or spaces)
-            const phone = "919000000000"; 
-            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+            msg += `\nTotal Amount: ₹${total.toLocaleString('en-IN')}\n`;
+
+            msg += `\n--- DELIVERY ADDRESS ---`;
+            msg += `\nName: ${name}`;
+            msg += `\nPhone: ${phone}`;
+            msg += `\nAddress: ${address}`;
+            msg += `\nCity/State: ${city}`;
+            msg += `\nPincode: ${pincode}`;
+
+            if (hasScreenshot) {
+                msg += `\n\n(I will attach my payment screenshot in this WhatsApp chat)`;
+            } else {
+                msg += `\n\n(Payment status: Pending confirmation)`;
+            }
+
+            msg += `\n\nPlease confirm my order!`;
+
+            // Active WhatsApp phone number
+            const storePhone = "918590614248"; 
+            window.open(`https://wa.me/${storePhone}?text=${encodeURIComponent(msg)}`, '_blank');
+
+            closeAddressModal();
         }
 
         renderBrandFilters();
         renderHeroPreview();
         renderProducts();
         updateCartUI();
-        
     </script>
 </body>
 </html>
