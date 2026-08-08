@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -8,16 +8,50 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Custom Styling -->
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Custom Styling & Theme Engine -->
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-        
+        :root {
+            --gold-gradient: linear-gradient(135deg, #FFF2D1 0%, #D4AF37 50%, #AA7C11 100%);
+            --gold-glow: 0 0 25px rgba(212, 175, 55, 0.15);
+        }
+
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #f4eee0;
-            color: #1a1a1a;
+            background-color: #08080A;
+            color: #F3F4F6;
             overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
+        }
+
+        .font-serif-luxury {
+            font-family: 'Cinzel', serif;
+        }
+
+        .gold-text-gradient {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-border {
+            border: 1px solid rgba(212, 175, 55, 0.25);
+        }
+
+        .gold-border-glow:hover {
+            border-color: rgba(212, 175, 55, 0.6);
+            box-shadow: var(--gold-glow);
+        }
+
+        .glass-card {
+            background: rgba(18, 20, 26, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
         }
 
         .no-scrollbar::-webkit-scrollbar {
@@ -28,7 +62,16 @@
             scrollbar-width: none;
         }
 
-        /* Prevent auto-zoom on mobile text inputs */
+        /* Ambient Background Glow */
+        .ambient-glow {
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, rgba(8, 8, 10, 0) 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
         @media screen and (max-width: 640px) {
             input, textarea, select {
                 font-size: 16px !important;
@@ -36,98 +79,121 @@
         }
     </style>
 </head>
-<body class="bg-[#f4eee0] text-[#1a1a1a] min-h-screen antialiased">
+<body class="bg-[#08080A] text-[#F3F4F6] min-h-screen antialiased selection:bg-[#D4AF37] selection:text-black">
 
-    <div class="w-full min-h-screen flex flex-col items-center">
+    <div class="relative w-full min-h-screen flex flex-col items-center overflow-hidden">
 
-        <!-- Header -->
-        <header class="w-full max-w-7xl px-4 sm:px-6 py-4 flex items-center justify-between border-b border-[#e5dcbe]">
-            <div class="flex items-center gap-2">
-                <span class="font-extrabold text-xl sm:text-2xl tracking-tight text-[#1a1a1a]">ASIRO ELITE</span>
-                <span class="text-[10px] font-semibold tracking-widest px-2 py-0.5 rounded-full bg-[#ebd8b0] text-[#705820]">est 2026</span>
+        <!-- Top Luxury Banner -->
+        <div class="w-full bg-gradient-to-r from-[#000000] via-[#16181F] to-[#000000] border-b border-[#D4AF37]/20 py-2 px-4 text-center text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase flex items-center justify-center gap-2 text-[#E6C687]">
+            <span class="inline-block w-1.5 h-1.5 rounded-full bg-[#D4AF37] animate-ping"></span>
+            <span>DIRECT INSTANT UPI PAYMENT • OG BOX INCLUDED ON ALL ORDERS</span>
+        </div>
+
+        <!-- Sticky Glass Header -->
+        <header class="sticky top-0 z-40 w-full max-w-7xl px-4 sm:px-8 py-4 flex items-center justify-between backdrop-blur-xl bg-[#08080A]/80 border-b border-white/5">
+            <div class="flex items-center gap-3">
+                <a href="#" class="font-serif-luxury font-black text-2xl sm:text-3xl tracking-wider text-white">
+                    ASIRO<span class="gold-text-gradient font-light">ELITE</span>
+                </a>
+                <span class="text-[9px] font-bold tracking-widest px-2.5 py-0.5 rounded-full bg-[#D4AF37]/10 text-[#E6C687] border border-[#D4AF37]/20 uppercase">
+                    EST 2026
+                </span>
             </div>
 
             <!-- Cart Trigger Button -->
-            <button id="cart-btn" onclick="openCartDrawer()" class="relative p-2.5 bg-[#1a1a1a] text-white rounded-full hover:bg-black transition-transform active:scale-95">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+            <button id="cart-btn" onclick="openCartDrawer()" class="relative p-3 bg-[#13151C] text-white rounded-full border border-white/10 hover:border-[#D4AF37]/50 transition-all active:scale-95 group">
+                <svg class="w-5 h-5 text-gray-300 group-hover:text-[#D4AF37] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                 </svg>
-                <span id="cart-count" class="hidden absolute -top-1 -right-1 bg-[#d9381e] text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+                <span id="cart-count" class="hidden absolute -top-1 -right-1 bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-black text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-lg">0</span>
             </button>
         </header>
 
         <!-- Main Content -->
-        <main class="w-full max-w-7xl px-3 sm:px-6 py-4 sm:py-6 space-y-6 sm:space-y-8">
+        <main class="relative z-10 w-full max-w-7xl px-3 sm:px-6 py-6 sm:py-8 space-y-8 sm:space-y-12">
             
-            <!-- Hero Banner with Auto-Scrolling Preview -->
-            <div class="w-full bg-[#ebd8b0] rounded-2xl p-5 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm border border-[#dec38e] overflow-hidden">
-                <div class="w-full md:max-w-md space-y-3 text-left">
-                    <div class="flex flex-wrap gap-2 items-center">
-                        <span class="inline-block text-[10px] sm:text-[11px] font-bold tracking-wider uppercase px-3 py-1 bg-[#1a1a1a] text-white rounded-full">
-                            • PREMIUM SNEAKERS
-                        </span>
-                        <span class="inline-block text-[10px] sm:text-[11px] font-black tracking-wider uppercase px-3 py-1 bg-[#d9381e] text-white rounded-full">
-                            💳 UPI ONLY STORE
-                        </span>
-                    </div>
-                    <h1 class="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight leading-none text-[#1a1a1a]">
-                        AUTHENTIC SNEAKERS.<br />
-                        <span class="text-[#8c6b23]">CURATED FOR ELITES.</span>
-                    </h1>
-                    <p class="text-xs sm:text-base text-[#5c5035] font-medium">
-                        Legit-checked grail footwear, delivered nationwide via Express DTDC.
-                    </p>
-                </div>
+            <!-- Hero Showcase Banner -->
+            <div class="relative w-full rounded-3xl p-6 sm:p-12 overflow-hidden border border-[#D4AF37]/20 bg-gradient-to-br from-[#12141A] via-[#0D0E12] to-[#08080A] shadow-2xl">
+                <div class="ambient-glow -top-20 -left-20"></div>
+                <div class="ambient-glow -bottom-20 -right-20"></div>
 
-                <!-- Auto-Moving Hero Product Slider -->
-                <div class="w-full md:max-w-md overflow-hidden">
-                    <div id="hero-preview" class="flex gap-3 overflow-x-auto no-scrollbar py-1 scroll-smooth"></div>
+                <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
+                    <div class="w-full lg:max-w-xl space-y-4 text-left">
+                        <div class="flex flex-wrap gap-2 items-center">
+                            <span class="inline-block text-[10px] font-black tracking-widest uppercase px-3 py-1 bg-[#D4AF37]/10 text-[#E6C687] rounded-full border border-[#D4AF37]/30">
+                                VIP SNEAKER VAULT
+                            </span>
+                            <span class="inline-block text-[10px] font-black tracking-widest uppercase px-3 py-1 bg-rose-500/10 text-rose-400 rounded-full border border-rose-500/20">
+                                💳 UPI PREPAID ONLY
+                            </span>
+                        </div>
+                        
+                        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-none text-white">
+                            AUTHENTIC GRAILS.<br />
+                            <span class="font-serif-luxury italic font-normal gold-text-gradient">CURATED FOR ELITES.</span>
+                        </h1>
+                        
+                        <p class="text-xs sm:text-sm text-gray-400 font-normal leading-relaxed max-w-md">
+                            Hand-inspected 1:1 mirror quality luxury footwear. Express nationwide DTDC shipping with full size-exchange guarantee.
+                        </p>
+                    </div>
+
+                    <!-- Auto-Moving Hero Product Slider -->
+                    <div class="w-full lg:max-w-md overflow-hidden pt-2">
+                        <div class="flex items-center justify-between pb-2 px-1">
+                            <span class="text-[10px] font-bold tracking-widest text-[#E6C687] uppercase">🔥 LIVE VAULT PREVIEW</span>
+                            <span class="text-[10px] font-medium text-gray-500">Tap item to view</span>
+                        </div>
+                        <div id="hero-preview" class="flex gap-3 overflow-x-auto no-scrollbar py-2 scroll-smooth"></div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Trust & Store Policy Banner -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-[#ebd8b0]/60 p-4 rounded-2xl border border-[#dec38e] text-xs">
-                <div class="flex items-center gap-3 p-2">
-                    <div class="p-2.5 bg-[#1a1a1a] text-white rounded-xl flex-shrink-0">
+            <!-- Value Props Banner -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div class="glass-card p-4 rounded-2xl flex items-center gap-3.5 border border-white/5 hover:border-[#D4AF37]/30 transition-all">
+                    <div class="p-3 bg-[#1A1D26] text-[#E6C687] rounded-xl border border-white/10 flex-shrink-0">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                         </svg>
                     </div>
                     <div>
-                        <p class="font-extrabold text-[#1a1a1a]">Express DTDC Delivery</p>
-                        <p class="text-[11px] text-[#5c5035]">Fast nationwide shipping with real-time tracking</p>
+                        <p class="font-bold text-xs text-white uppercase tracking-wider">Express DTDC Delivery</p>
+                        <p class="text-[11px] text-gray-400">Fast nationwide shipping with tracking</p>
                     </div>
                 </div>
 
-                <div class="flex items-center gap-3 p-2">
-                    <div class="p-2.5 bg-[#1a1a1a] text-white rounded-xl flex-shrink-0">
+                <div class="glass-card p-4 rounded-2xl flex items-center gap-3.5 border border-white/5 hover:border-[#D4AF37]/30 transition-all">
+                    <div class="p-3 bg-[#1A1D26] text-[#E6C687] rounded-xl border border-white/10 flex-shrink-0">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
                         </svg>
                     </div>
                     <div>
-                        <p class="font-extrabold text-[#1a1a1a]">Easy Size Exchange</p>
-                        <p class="text-[11px] text-[#5c5035]">Hassle-free exchange support for sizing & quality</p>
+                        <p class="font-bold text-xs text-white uppercase tracking-wider">Easy Size Exchange</p>
+                        <p class="text-[11px] text-gray-400">Hassle-free sizing & quality support</p>
                     </div>
                 </div>
 
-                <div class="flex items-center gap-3 p-2">
-                    <div class="p-2.5 bg-[#1a1a1a] text-white rounded-xl flex-shrink-0">
+                <div class="glass-card p-4 rounded-2xl flex items-center gap-3.5 border border-white/5 hover:border-[#D4AF37]/30 transition-all">
+                    <div class="p-3 bg-[#1A1D26] text-[#E6C687] rounded-xl border border-white/10 flex-shrink-0">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
                     </div>
                     <div>
-                        <p class="font-extrabold text-[#1a1a1a]">100% Authentic Quality</p>
-                        <p class="text-[11px] text-[#5c5035]">Legit-checked sneakers with OG Box included</p>
+                        <p class="font-bold text-xs text-white uppercase tracking-wider">100% Authentic Quality</p>
+                        <p class="text-[11px] text-gray-400">Legit-checked sneakers with OG Box included</p>
                     </div>
                 </div>
             </div>
 
             <!-- Brand Filter Bar -->
-            <div class="w-full space-y-2 sm:space-y-3">
-                <span class="text-xs font-bold text-[#7a6b4c]">• FILTER BY BRAND</span>
-                <div id="brand-filters" class="w-full flex gap-2 overflow-x-auto no-scrollbar pb-1"></div>
+            <div class="w-full space-y-3 pt-2">
+                <div class="flex justify-between items-center px-1">
+                    <span class="text-xs font-bold text-[#E6C687] tracking-widest uppercase">• FILTER BY BRAND</span>
+                </div>
+                <div id="brand-filters" class="w-full flex gap-2.5 overflow-x-auto no-scrollbar pb-1"></div>
             </div>
 
             <!-- Product Grid -->
@@ -136,81 +202,66 @@
         </main>
 
         <!-- Footer -->
-        <footer class="w-full border-t border-[#e5dcbe] mt-12 py-8 text-center text-xs font-semibold text-[#7a6b4c] space-y-2">
-            <p>🚚 Shipping Partner: Express DTDC Delivery | 🔄 Size Exchange Support Available</p>
-            <p>© 2026 ASIRO ELITE. All Rights Reserved. Verified Authentic Grails.</p>
+        <footer class="w-full border-t border-white/5 mt-16 py-10 text-center text-xs font-medium text-gray-500 space-y-3 bg-[#050507]">
+            <p class="tracking-wider text-gray-400">🚚 Shipping Partner: Express DTDC Delivery | 🔄 Size Exchange Support Available</p>
+            <p class="text-[11px] font-serif-luxury text-[#E6C687]/60">© 2026 ASIRO ELITE. All Rights Reserved. Verified Authentic Grails.</p>
         </footer>
 
     </div>
 
-<!-- PRODUCT DETAIL MODAL (ZOOMED-IN IMAGE LAYOUT) -->
-    <div id="product-modal" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
-        <div class="relative w-full max-w-4xl bg-[#f4eee0] rounded-3xl shadow-2xl overflow-hidden my-auto border border-[#dec38e] flex flex-col md:flex-row max-h-[90vh] md:max-h-none overflow-y-auto">
+    <!-- PRODUCT DETAIL MODAL -->
+    <div id="product-modal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+        <div class="relative w-full max-w-4xl bg-[#0F1117] text-white rounded-3xl shadow-2xl overflow-hidden my-auto border border-[#D4AF37]/30 flex flex-col md:flex-row max-h-[90vh] md:max-h-none overflow-y-auto">
             
-            <!-- Close Button -->
-            <button onclick="closeModal()" class="absolute top-4 right-4 z-20 w-9 h-9 bg-[#1a1a1a] text-white rounded-full flex items-center justify-center hover:scale-105 active:scale-95 transition-transform">
+            <button onclick="closeModal()" class="absolute top-4 right-4 z-20 w-9 h-9 bg-[#1A1D26] text-gray-300 rounded-full flex items-center justify-center hover:text-white hover:bg-[#252936] active:scale-95 transition-all">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
 
-            <!-- Modal Left: Zoomed Product Image View -->
-            <div class="w-full md:w-1/2 bg-[#ebd8b0]/40 p-2 sm:p-4 flex items-center justify-center min-h-[300px] sm:min-h-[380px] overflow-hidden">
-                <img id="modal-image" src="" alt="" class="w-full h-full max-h-[350px] sm:max-h-[420px] object-cover sm:object-contain scale-125 sm:scale-110 transform transition-transform duration-300 drop-shadow-2xl" />
+            <!-- Zoomed Product Image Display -->
+            <div class="w-full md:w-1/2 bg-gradient-to-b from-[#181B24] to-[#0F1117] p-4 sm:p-6 flex items-center justify-center min-h-[300px] sm:min-h-[400px] overflow-hidden border-b md:border-b-0 md:border-r border-white/5 relative">
+                <div class="ambient-glow"></div>
+                <img id="modal-image" src="" alt="" class="relative z-10 w-full h-full max-h-[360px] sm:max-h-[420px] object-contain scale-110 transform transition-transform duration-300 drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)]" />
             </div>
 
-            <!-- Modal Right: Content -->
-            <div class="w-full md:w-1/2 p-5 sm:p-8 flex flex-col justify-between space-y-4">
-                <div class="space-y-3">
-                    <span id="modal-badge" class="inline-block text-[10px] font-extrabold tracking-wider uppercase px-3 py-1 bg-[#1a1a1a] text-white rounded-full"></span>
-                    <div>
-                        <h2 id="modal-title" class="text-xl sm:text-3xl font-black text-[#1a1a1a] leading-tight"></h2>
-                    </div>
-                    <p id="modal-price" class="text-2xl sm:text-3xl font-extrabold text-[#1a1a1a]"></p>
+            <div class="w-full md:w-1/2 p-6 sm:p-8 flex flex-col justify-between space-y-6">
+                <div class="space-y-4">
+                    <span id="modal-badge" class="inline-block text-[10px] font-black tracking-widest uppercase px-3 py-1 bg-[#D4AF37]/10 text-[#E6C687] rounded-full border border-[#D4AF37]/30"></span>
                     
-                    <div class="space-y-1.5">
-                        <p class="text-[10px] sm:text-[11px] font-black uppercase text-[#1a1a1a] tracking-wider">PRODUCT HIGHLIGHTS</p>
-                        <ul id="modal-description" class="space-y-1.5 text-xs text-[#5c5035] font-medium bg-[#ebd8b0]/40 p-3 rounded-2xl border border-[#dec38e]"></ul>
+                    <div>
+                        <h2 id="modal-title" class="text-xl sm:text-3xl font-black text-white leading-tight"></h2>
+                    </div>
+                    
+                    <p id="modal-price" class="text-2xl sm:text-3xl font-extrabold gold-text-gradient"></p>
+                    
+                    <div class="space-y-2">
+                        <p class="text-[10px] font-black uppercase text-[#E6C687] tracking-widest">PRODUCT HIGHLIGHTS</p>
+                        <ul id="modal-description" class="space-y-2 text-xs text-gray-300 font-medium bg-[#161822] p-3.5 rounded-2xl border border-white/5"></ul>
                     </div>
 
-                    <div class="space-y-1.5 bg-[#ebd8b0]/70 p-3 rounded-2xl border border-[#dec38e] text-xs">
-                        <div class="flex justify-between border-b border-[#dec38e] pb-1">
-                            <span class="text-[#7a6b4c] font-bold">Payment Method:</span>
-                            <span class="font-extrabold text-[#d9381e]">UPI Prepaid Only</span>
+                    <div class="space-y-2 bg-[#161822] p-3.5 rounded-2xl border border-white/5 text-xs">
+                        <div class="flex justify-between border-b border-white/5 pb-1.5">
+                            <span class="text-gray-400 font-medium">Payment Method:</span>
+                            <span class="font-extrabold text-rose-400">UPI Prepaid Only</span>
                         </div>
-                        <div class="flex justify-between border-b border-[#dec38e] py-1">
-                            <span class="text-[#7a6b4c] font-bold">Shipping Partner:</span>
-                            <span class="font-extrabold text-[#1a1a1a]">Express DTDC Delivery</span>
+                        <div class="flex justify-between border-b border-white/5 py-1.5">
+                            <span class="text-gray-400 font-medium">Shipping Partner:</span>
+                            <span class="font-extrabold text-white">Express DTDC Delivery</span>
                         </div>
-                        <div class="flex justify-between pt-1">
-                            <span class="text-[#7a6b4c] font-bold">Quality Proof:</span>
-                            <span class="font-extrabold text-[#1a1a1a]">OG Box Included</span>
+                        <div class="flex justify-between pt-1.5">
+                            <span class="text-gray-400 font-medium">Quality Proof:</span>
+                            <span class="font-extrabold text-[#E6C687]">OG Box Included</span>
                         </div>
                     </div>
 
                     <div class="space-y-2 pt-1">
-                        <p class="text-[10px] sm:text-[11px] font-black uppercase text-[#1a1a1a] tracking-wider">SELECT SIZE (EU)</p>
+                        <p class="text-[10px] font-black uppercase text-white tracking-widest">SELECT SIZE (EU)</p>
                         <div id="modal-sizes" class="flex flex-wrap gap-2"></div>
                     </div>
                 </div>
 
-                <button onclick="addToCart()" class="w-full bg-[#1a1a1a] hover:bg-black text-white font-extrabold text-xs uppercase tracking-widest py-4 rounded-2xl shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-2 mt-4">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                    </svg>
-                    ADD TO BAG & CHECKOUT
-                </button>
-            </div>
-        </div>
-    </div>
-
-                    <div class="space-y-2 pt-1">
-                        <p class="text-[10px] sm:text-[11px] font-black uppercase text-[#1a1a1a] tracking-wider">SELECT SIZE (EU)</p>
-                        <div id="modal-sizes" class="flex flex-wrap gap-2"></div>
-                    </div>
-                </div>
-
-                <button onclick="addToCart()" class="w-full bg-[#1a1a1a] hover:bg-black text-white font-extrabold text-xs uppercase tracking-widest py-4 rounded-2xl shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-2 mt-4">
+                <button onclick="addToCart()" class="w-full bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] hover:from-[#E6C687] hover:to-[#D4AF37] text-black font-extrabold text-xs uppercase tracking-widest py-4 rounded-2xl shadow-xl transition-all active:scale-95 flex items-center justify-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                     </svg>
@@ -221,18 +272,18 @@
     </div>
 
     <!-- CART SLIDE-OVER DRAWER -->
-    <div id="cart-drawer" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex justify-end">
-        <div class="w-full max-w-md bg-[#f4eee0] h-full shadow-2xl flex flex-col justify-between border-l border-[#dec38e] p-5 sm:p-6 overflow-y-auto">
+    <div id="cart-drawer" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex justify-end">
+        <div class="w-full max-w-md bg-[#0F1117] text-white h-full shadow-2xl flex flex-col justify-between border-l border-white/10 p-5 sm:p-6 overflow-y-auto">
             
-            <div class="space-y-5">
-                <div class="flex items-center justify-between border-b border-[#e5dcbe] pb-4">
+            <div class="space-y-6">
+                <div class="flex items-center justify-between border-b border-white/10 pb-4">
                     <div class="flex items-center gap-2">
-                        <h2 class="text-xl font-black text-[#1a1a1a]">YOUR BAG</h2>
-                        <span id="drawer-cart-count" class="text-xs font-bold bg-[#1a1a1a] text-white px-2 py-0.5 rounded-full">0</span>
+                        <h2 class="text-lg font-black tracking-wider text-white">YOUR SHOPPING BAG</h2>
+                        <span id="drawer-cart-count" class="text-xs font-bold bg-[#D4AF37] text-black px-2.5 py-0.5 rounded-full">0</span>
                     </div>
-                    <button onclick="closeCartDrawer()" class="p-2 bg-[#ebd8b0] text-[#1a1a1a] rounded-full hover:bg-[#d8ccaa] transition-all">
+                    <button onclick="closeCartDrawer()" class="p-2 bg-[#1A1D26] text-gray-300 rounded-full hover:text-white transition-all">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
                 </div>
@@ -240,13 +291,13 @@
                 <div id="cart-items-list" class="space-y-3"></div>
             </div>
 
-            <div class="border-t border-[#e5dcbe] pt-4 space-y-3">
-                <div class="flex justify-between text-sm font-extrabold text-[#1a1a1a]">
-                    <span>TOTAL PRICE:</span>
-                    <span id="cart-total-price">₹0</span>
+            <div class="border-t border-white/10 pt-5 space-y-4">
+                <div class="flex justify-between text-sm font-extrabold text-white">
+                    <span class="tracking-wider">TOTAL PRICE:</span>
+                    <span id="cart-total-price" class="gold-text-gradient text-base">₹0</span>
                 </div>
-                <p class="text-[11px] text-[#5c5035] font-semibold text-center">🚚 Includes Free Nationwide Express DTDC Shipping</p>
-                <button onclick="openAddressModal()" class="w-full bg-[#1a1a1a] hover:bg-black text-white font-extrabold text-xs uppercase tracking-widest py-4 rounded-2xl shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-2">
+                <p class="text-[11px] text-gray-400 font-medium text-center">🚚 Includes Free Nationwide Express DTDC Shipping</p>
+                <button onclick="openAddressModal()" class="w-full bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-black font-extrabold text-xs uppercase tracking-widest py-4 rounded-2xl shadow-xl transition-all active:scale-95 flex items-center justify-center gap-2">
                     PROCEED TO CHECKOUT
                 </button>
             </div>
@@ -255,16 +306,16 @@
     </div>
 
     <!-- ADDRESS & PAYMENT DETAILS MODAL -->
-    <div id="address-modal" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
-        <div class="relative w-full max-w-lg bg-[#f4eee0] rounded-3xl shadow-2xl p-5 sm:p-6 border border-[#dec38e] space-y-4 my-auto max-h-[90vh] overflow-y-auto">
-            <div class="flex justify-between items-center border-b border-[#e5dcbe] pb-3">
+    <div id="address-modal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+        <div class="relative w-full max-w-lg bg-[#0F1117] text-white rounded-3xl shadow-2xl p-6 border border-[#D4AF37]/30 space-y-5 my-auto max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center border-b border-white/10 pb-4">
                 <div>
-                    <h3 class="text-lg font-black text-[#1a1a1a]">CHECKOUT & PAYMENT</h3>
-                    <p class="text-[11px] text-[#7a6b4c] font-semibold">Complete delivery info and UPI payment to place order</p>
+                    <h3 class="text-lg font-black tracking-wider text-white">CHECKOUT & PAYMENT</h3>
+                    <p class="text-[11px] text-gray-400">Complete delivery address and instant UPI payment</p>
                 </div>
-                <button onclick="closeAddressModal()" class="p-1.5 bg-[#ebd8b0] text-[#1a1a1a] rounded-full hover:bg-[#d8ccaa] transition-all">
+                <button onclick="closeAddressModal()" class="p-2 bg-[#1A1D26] text-gray-300 rounded-full hover:text-white transition-all">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
@@ -272,54 +323,54 @@
             <form id="address-form" onsubmit="confirmOrderAndRedirect(event)" class="space-y-4">
                 <!-- 1. Delivery Details Section -->
                 <div class="space-y-3">
-                    <h4 class="text-xs font-black uppercase tracking-wider text-[#8c6b23]">• 1. DELIVERY ADDRESS</h4>
+                    <h4 class="text-xs font-black uppercase tracking-widest text-[#E6C687]">• 1. DELIVERY ADDRESS</h4>
                     <div>
-                        <label class="block text-xs font-extrabold text-[#1a1a1a] mb-1">FULL NAME *</label>
-                        <input type="text" id="cust-name" required placeholder="e.g. Rahul Sharma" class="w-full px-3.5 py-2.5 bg-[#fcefd2] border border-[#dec38e] rounded-xl text-xs font-semibold focus:outline-none focus:border-[#1a1a1a]" />
+                        <label class="block text-[11px] font-bold text-gray-300 mb-1">FULL NAME *</label>
+                        <input type="text" id="cust-name" required placeholder="e.g. Rahul Sharma" class="w-full px-4 py-3 bg-[#161822] border border-white/10 rounded-xl text-xs font-semibold text-white focus:outline-none focus:border-[#D4AF37]" />
                     </div>
                     <div>
-                        <label class="block text-xs font-extrabold text-[#1a1a1a] mb-1">PHONE / WHATSAPP NUMBER *</label>
-                        <input type="tel" id="cust-phone" required placeholder="e.g. 8590614248" class="w-full px-3.5 py-2.5 bg-[#fcefd2] border border-[#dec38e] rounded-xl text-xs font-semibold focus:outline-none focus:border-[#1a1a1a]" />
+                        <label class="block text-[11px] font-bold text-gray-300 mb-1">PHONE / WHATSAPP NUMBER *</label>
+                        <input type="tel" id="cust-phone" required placeholder="e.g. 8590614248" class="w-full px-4 py-3 bg-[#161822] border border-white/10 rounded-xl text-xs font-semibold text-white focus:outline-none focus:border-[#D4AF37]" />
                     </div>
                     <div>
-                        <label class="block text-xs font-extrabold text-[#1a1a1a] mb-1">COMPLETE STREET ADDRESS *</label>
-                        <textarea id="cust-address" required rows="2" placeholder="House/Flat No., Street Name, Area/Landmark" class="w-full px-3.5 py-2.5 bg-[#fcefd2] border border-[#dec38e] rounded-xl text-xs font-semibold focus:outline-none focus:border-[#1a1a1a]"></textarea>
+                        <label class="block text-[11px] font-bold text-gray-300 mb-1">COMPLETE STREET ADDRESS *</label>
+                        <textarea id="cust-address" required rows="2" placeholder="House/Flat No., Street Name, Area/Landmark" class="w-full px-4 py-3 bg-[#161822] border border-white/10 rounded-xl text-xs font-semibold text-white focus:outline-none focus:border-[#D4AF37]"></textarea>
                     </div>
                     <div class="grid grid-cols-2 gap-3">
                         <div>
-                            <label class="block text-xs font-extrabold text-[#1a1a1a] mb-1">CITY / STATE *</label>
-                            <input type="text" id="cust-city" required placeholder="e.g. Mumbai, MH" class="w-full px-3.5 py-2.5 bg-[#fcefd2] border border-[#dec38e] rounded-xl text-xs font-semibold focus:outline-none focus:border-[#1a1a1a]" />
+                            <label class="block text-[11px] font-bold text-gray-300 mb-1">CITY / STATE *</label>
+                            <input type="text" id="cust-city" required placeholder="e.g. Mumbai, MH" class="w-full px-4 py-3 bg-[#161822] border border-white/10 rounded-xl text-xs font-semibold text-white focus:outline-none focus:border-[#D4AF37]" />
                         </div>
                         <div>
-                            <label class="block text-xs font-extrabold text-[#1a1a1a] mb-1">PINCODE *</label>
-                            <input type="text" id="cust-pincode" required placeholder="e.g. 400001" class="w-full px-3.5 py-2.5 bg-[#fcefd2] border border-[#dec38e] rounded-xl text-xs font-semibold focus:outline-none focus:border-[#1a1a1a]" />
+                            <label class="block text-[11px] font-bold text-gray-300 mb-1">PINCODE *</label>
+                            <input type="text" id="cust-pincode" required placeholder="e.g. 400001" class="w-full px-4 py-3 bg-[#161822] border border-white/10 rounded-xl text-xs font-semibold text-white focus:outline-none focus:border-[#D4AF37]" />
                         </div>
                     </div>
                 </div>
 
                 <!-- 2. Payment Details Section with Copy Buttons -->
-                <div class="space-y-3 pt-2 border-t border-[#e5dcbe]">
-                    <h4 class="text-xs font-black uppercase tracking-wider text-[#8c6b23]">• 2. PAY VIA UPI</h4>
-                    <div class="bg-[#ebd8b0] p-3.5 rounded-2xl border border-[#dec38e] space-y-2.5 text-xs">
+                <div class="space-y-3 pt-3 border-t border-white/10">
+                    <h4 class="text-xs font-black uppercase tracking-widest text-[#E6C687]">• 2. PAY VIA UPI</h4>
+                    <div class="bg-[#161822] p-4 rounded-2xl border border-white/10 space-y-3 text-xs">
                         
                         <!-- UPI Number -->
-                        <div class="flex justify-between items-center pb-2 border-b border-[#dec38e]">
+                        <div class="flex justify-between items-center pb-2.5 border-b border-white/5">
                             <div>
-                                <span class="block text-[10px] text-[#7a6b4c] font-bold">UPI NUMBER (PRIMARY)</span>
-                                <span class="font-black text-[#d9381e] text-sm">8590614248</span>
+                                <span class="block text-[9px] text-gray-400 font-bold uppercase tracking-widest">UPI NUMBER (PRIMARY)</span>
+                                <span class="font-black text-rose-400 text-sm">8590614248</span>
                             </div>
-                            <button type="button" onclick="copyText('8590614248', this)" class="px-3 py-1.5 text-[10px] font-black bg-[#1a1a1a] text-white rounded-xl hover:bg-black active:scale-95 transition-transform flex items-center gap-1">
+                            <button type="button" onclick="copyText('8590614248', this)" class="px-3 py-1.5 text-[10px] font-black bg-[#D4AF37] text-black rounded-xl hover:bg-[#E6C687] active:scale-95 transition-transform flex items-center gap-1">
                                 📋 COPY
                             </button>
                         </div>
 
                         <!-- UPI ID 1 -->
-                        <div class="flex justify-between items-center pb-2 border-b border-[#dec38e]">
+                        <div class="flex justify-between items-center pb-2.5 border-b border-white/5">
                             <div>
-                                <span class="block text-[10px] text-[#7a6b4c] font-bold">UPI ID 1</span>
-                                <span class="font-black text-[#1a1a1a] text-xs">arjunajujr03@oksbi</span>
+                                <span class="block text-[9px] text-gray-400 font-bold uppercase tracking-widest">UPI ID 1</span>
+                                <span class="font-black text-white text-xs">arjunajujr03@oksbi</span>
                             </div>
-                            <button type="button" onclick="copyText('arjunajujr03@oksbi', this)" class="px-3 py-1.5 text-[10px] font-black bg-[#1a1a1a] text-white rounded-xl hover:bg-black active:scale-95 transition-transform flex items-center gap-1">
+                            <button type="button" onclick="copyText('arjunajujr03@oksbi', this)" class="px-3 py-1.5 text-[10px] font-black bg-[#D4AF37] text-black rounded-xl hover:bg-[#E6C687] active:scale-95 transition-transform flex items-center gap-1">
                                 📋 COPY
                             </button>
                         </div>
@@ -327,10 +378,10 @@
                         <!-- UPI ID 2 -->
                         <div class="flex justify-between items-center">
                             <div>
-                                <span class="block text-[10px] text-[#7a6b4c] font-bold">UPI ID 2</span>
-                                <span class="font-black text-[#1a1a1a] text-xs">arjunj01@pthdfc</span>
+                                <span class="block text-[9px] text-gray-400 font-bold uppercase tracking-widest">UPI ID 2</span>
+                                <span class="font-black text-white text-xs">arjunj01@pthdfc</span>
                             </div>
-                            <button type="button" onclick="copyText('arjunj01@pthdfc', this)" class="px-3 py-1.5 text-[10px] font-black bg-[#1a1a1a] text-white rounded-xl hover:bg-black active:scale-95 transition-transform flex items-center gap-1">
+                            <button type="button" onclick="copyText('arjunj01@pthdfc', this)" class="px-3 py-1.5 text-[10px] font-black bg-[#D4AF37] text-black rounded-xl hover:bg-[#E6C687] active:scale-95 transition-transform flex items-center gap-1">
                                 📋 COPY
                             </button>
                         </div>
@@ -338,26 +389,26 @@
 
                     <!-- Screenshot Upload -->
                     <div>
-                        <label class="block text-xs font-extrabold text-[#1a1a1a] mb-1">UPLOAD PAYMENT SCREENSHOT</label>
-                        <input type="file" id="cust-screenshot" accept="image/*" class="w-full px-3 py-2 bg-[#fcefd2] border border-[#dec38e] rounded-xl text-xs font-semibold file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-black file:bg-[#1a1a1a] file:text-white hover:file:bg-black cursor-pointer" />
+                        <label class="block text-[11px] font-bold text-gray-300 mb-1">UPLOAD PAYMENT SCREENSHOT</label>
+                        <input type="file" id="cust-screenshot" accept="image/*" class="w-full px-3 py-2 bg-[#161822] border border-white/10 rounded-xl text-xs font-semibold text-gray-300 file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-black file:bg-[#D4AF37] file:text-black hover:file:bg-[#E6C687] cursor-pointer" />
                     </div>
                 </div>
 
-                <!-- 3. Primary Action Button (CONFIRM ORDER) -->
-                <button type="submit" class="w-full bg-[#1a1a1a] hover:bg-black text-white font-extrabold text-xs uppercase tracking-widest py-4 rounded-2xl shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-2 mt-4">
+                <!-- 3. Primary Action Button -->
+                <button type="submit" class="w-full bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-black font-extrabold text-xs uppercase tracking-widest py-4 rounded-2xl shadow-xl transition-all active:scale-95 flex items-center justify-center gap-2 mt-4">
                     CONFIRM & ORDER ON WHATSAPP
                 </button>
 
-                <!-- 4. Facing Issues WhatsApp Chat Box (LAST OPTION AT BOTTOM) -->
-                <div class="pt-2 border-t border-[#e5dcbe]">
-                    <a href="https://wa.me/918590614248?text=Hello%20ASIRO%20ELITE!%20I%20am%20facing%20an%20issue%20with%20my%20order/payment." target="_blank" class="flex items-center justify-between p-3.5 bg-[#e5dcbe]/80 hover:bg-[#e5dcbe] rounded-2xl border border-[#dec38e] transition-all group active:scale-98">
+                <!-- 4. Facing Issues WhatsApp Chat Box -->
+                <div class="pt-2 border-t border-white/10">
+                    <a href="https://wa.me/918590614248?text=Hello%20ASIRO%20ELITE!%20I%20am%20facing%20an%20issue%20with%20my%20order/payment." target="_blank" class="flex items-center justify-between p-3.5 bg-[#161822] hover:bg-[#1C1F2D] rounded-2xl border border-white/5 transition-all group active:scale-98">
                         <div class="flex items-center gap-2.5">
                             <svg class="w-4 h-4 text-[#25D366] flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M12.031 2c-5.514 0-9.999 4.486-9.999 10.001 0 1.765.459 3.487 1.332 5.006l-1.364 4.993 5.111-1.34c1.468.8 3.123 1.222 4.92 1.222 5.514 0 9.999-4.486 9.999-10.001s-4.485-10.001-9.999-10.001zm5.95 14.182c-.252.708-1.261 1.341-1.74 1.385-.453.041-1.042.186-3.376-.731-2.836-1.114-4.636-4.004-4.777-4.195-.141-.191-1.149-1.53-1.149-2.92 0-1.391.731-2.072 1.002-2.353.271-.281.591-.352.788-.352.197 0 .394.002.563.01.18.008.423-.068.662.507.252.607.859 2.099.933 2.25.074.151.123.328.024.525-.098.197-.148.319-.295.492-.148.173-.311.386-.443.518-.148.148-.302.311-.131.605.172.293.763 1.26 1.637 2.039 1.125.999 2.072 1.309 2.365 1.457.293.148.468.123.64-.074.172-.197.738-.861.933-1.157.197-.295.394-.246.662-.148.271.098 1.722.812 2.017.96.295.148.492.222.563.344.07.123.07.708-.182 1.416z"/>
                             </svg>
-                            <span class="text-xs font-extrabold text-[#1a1a1a]">Facing issues? Chat with us on WhatsApp</span>
+                            <span class="text-xs font-bold text-gray-300">Facing issues? Chat with us on WhatsApp</span>
                         </div>
-                        <span class="text-xs font-black text-[#8c6b23] group-hover:translate-x-0.5 transition-transform">→</span>
+                        <span class="text-xs font-bold text-[#D4AF37] group-hover:translate-x-0.5 transition-transform">→</span>
                     </a>
                 </div>
 
@@ -1216,12 +1267,12 @@
             navigator.clipboard.writeText(text).then(() => {
                 const original = btnElement.innerText;
                 btnElement.innerText = "✓ COPIED!";
-                btnElement.classList.remove('bg-[#1a1a1a]');
-                btnElement.classList.add('bg-green-600');
+                btnElement.classList.remove('bg-[#D4AF37]');
+                btnElement.classList.add('bg-emerald-500', 'text-white');
                 setTimeout(() => {
                     btnElement.innerText = original;
-                    btnElement.classList.remove('bg-green-600');
-                    btnElement.classList.add('bg-[#1a1a1a]');
+                    btnElement.classList.remove('bg-emerald-500', 'text-white');
+                    btnElement.classList.add('bg-[#D4AF37]');
                 }, 1500);
             }).catch(() => {
                 const el = document.createElement('textarea');
@@ -1238,8 +1289,10 @@
         function renderBrandFilters() {
             const container = document.getElementById('brand-filters');
             container.innerHTML = BRANDS.map(brand => `
-                <button onclick="setBrand('${brand}')" class="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl text-[11px] sm:text-xs font-extrabold whitespace-nowrap transition-all active:scale-95 ${
-                    selectedBrand === brand ? 'bg-[#1a1a1a] text-white shadow-sm' : 'bg-[#e5dcbe] text-[#4a422e] hover:bg-[#d8ccaa]'
+                <button onclick="setBrand('${brand}')" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all active:scale-95 ${
+                    selectedBrand === brand 
+                        ? 'bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-black shadow-lg shadow-[#D4AF37]/10' 
+                        : 'bg-[#13151C] text-gray-400 border border-white/5 hover:border-white/20 hover:text-white'
                 }">
                     ${brand}
                 </button>
@@ -1259,10 +1312,12 @@
             container.innerHTML = loopList.map((p, index) => {
                 const originalIndex = index % PRODUCTS.length;
                 return `
-                    <div onclick="openModal(${originalIndex})" class="min-w-[130px] sm:min-w-[150px] bg-[#f4eee0] p-2.5 sm:p-3 rounded-xl border border-[#dec38e] cursor-pointer hover:border-[#1a1a1a] transition-all flex-shrink-0 active:scale-95">
-                        <img src="${p.image}" alt="${p.name}" class="w-full h-20 sm:h-24 object-contain mb-1 pointer-events-none" />
-                        <p class="text-[11px] sm:text-xs font-extrabold line-clamp-1">${p.name}</p>
-                        <p class="text-[11px] sm:text-xs font-bold text-[#1a1a1a]">₹${p.price.toLocaleString('en-IN')}</p>
+                    <div onclick="openModal(${originalIndex})" class="min-w-[130px] sm:min-w-[150px] bg-[#161822] p-3 rounded-2xl border border-white/10 cursor-pointer hover:border-[#D4AF37]/50 transition-all flex-shrink-0 active:scale-95 group">
+                        <div class="w-full h-20 sm:h-24 bg-[#1A1D28] rounded-xl p-2 flex items-center justify-center mb-2">
+                            <img src="${p.image}" alt="${p.name}" class="max-h-full object-contain pointer-events-none group-hover:scale-105 transition-transform" />
+                        </div>
+                        <p class="text-[11px] font-bold text-white line-clamp-1">${p.name}</p>
+                        <p class="text-[11px] font-black gold-text-gradient">₹${p.price.toLocaleString('en-IN')}</p>
                     </div>
                 `;
             }).join('');
@@ -1312,7 +1367,7 @@
 
             if (displayList.length === 0) {
                 container.innerHTML = `
-                    <div class="col-span-full py-12 text-center text-[#7a6b4c] font-bold">
+                    <div class="col-span-full py-16 text-center text-gray-500 font-medium">
                         No products currently available for ${selectedBrand}.
                     </div>
                 `;
@@ -1320,21 +1375,21 @@
             }
 
             container.innerHTML = displayList.map(p => `
-                <div onclick="openModal(${p.origIdx})" class="w-full bg-[#fcefd2] rounded-xl sm:rounded-2xl p-2.5 sm:p-4 border border-[#e5dcbe] shadow-sm flex flex-col justify-between space-y-2 sm:space-y-4 cursor-pointer hover:shadow-md transition-all active:scale-[0.98]">
+                <div onclick="openModal(${p.origIdx})" class="group w-full glass-card rounded-2xl sm:rounded-3xl p-3 sm:p-4 border border-white/5 shadow-xl flex flex-col justify-between space-y-3 cursor-pointer gold-border-glow transition-all active:scale-[0.98]">
                     
-                    <div class="relative w-full bg-[#f4eee0] rounded-lg sm:rounded-xl p-2 flex items-center justify-center aspect-[3/4] overflow-hidden">
-                        <span class="absolute top-1.5 left-1.5 sm:top-3 sm:left-3 z-10 text-[8px] sm:text-[10px] font-black uppercase bg-[#1a1a1a] text-white px-1.5 sm:px-2 py-0.5 rounded-md">
+                    <div class="relative w-full bg-[#181B24] rounded-xl sm:rounded-2xl p-3 flex items-center justify-center aspect-[4/3] sm:aspect-square overflow-hidden">
+                        <span class="absolute top-2 left-2 sm:top-3 sm:left-3 z-10 text-[8px] sm:text-[10px] font-black uppercase tracking-widest bg-black/80 text-[#E6C687] px-2 py-1 rounded-md border border-[#D4AF37]/30 backdrop-blur-md">
                             ${p.badge}
                         </span>
-                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-contain hover:scale-105 transition-transform duration-300" />
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500 drop-shadow-[0_10px_15px_rgba(0,0,0,0.6)]" />
                     </div>
 
-                    <div class="space-y-0.5 sm:space-y-1">
-                        <h3 class="text-xs sm:text-base font-black tracking-tight line-clamp-2 leading-tight">${p.name}</h3>
-                        <p class="text-sm sm:text-xl font-extrabold text-[#1a1a1a] pt-0.5">₹${p.price.toLocaleString('en-IN')}</p>
+                    <div class="space-y-1 px-1">
+                        <h3 class="text-xs sm:text-sm font-bold tracking-tight text-white line-clamp-2 leading-snug group-hover:text-[#E6C687] transition-colors">${p.name}</h3>
+                        <p class="text-sm sm:text-lg font-black gold-text-gradient pt-0.5">₹${p.price.toLocaleString('en-IN')}</p>
                     </div>
 
-                    <button onclick="event.stopPropagation(); openModal(${p.origIdx})" class="w-full bg-[#1a1a1a] hover:bg-black text-white font-extrabold text-[10px] sm:text-xs uppercase py-2.5 sm:py-3 rounded-lg sm:rounded-xl transition-transform active:scale-95">
+                    <button onclick="event.stopPropagation(); openModal(${p.origIdx})" class="w-full bg-[#1A1D26] hover:bg-gradient-to-r hover:from-[#D4AF37] hover:to-[#AA7C11] text-gray-200 hover:text-black font-extrabold text-[10px] sm:text-xs uppercase tracking-wider py-2.5 sm:py-3 rounded-xl transition-all border border-white/5 active:scale-95">
                         ADD TO BAG / DETAILS
                     </button>
                 </div>
@@ -1355,14 +1410,14 @@
             if (Array.isArray(p.description)) {
                 descContainer.innerHTML = p.description.map(pt => `
                     <li class="flex items-start gap-2">
-                        <span class="text-[#8c6b23] font-black text-sm leading-none">•</span>
+                        <span class="text-[#D4AF37] font-black text-xs leading-none">•</span>
                         <span>${pt}</span>
                     </li>
                 `).join('');
             } else {
                 descContainer.innerHTML = `
                     <li class="flex items-start gap-2">
-                        <span class="text-[#8c6b23] font-black text-sm leading-none">•</span>
+                        <span class="text-[#D4AF37] font-black text-xs leading-none">•</span>
                         <span>${p.description}</span>
                     </li>
                 `;
@@ -1377,10 +1432,10 @@
         function renderSizes(sizes) {
             const container = document.getElementById('modal-sizes');
             container.innerHTML = sizes.map(size => `
-                <button onclick="selectSize(${size})" class="px-3.5 py-2 text-xs font-extrabold rounded-xl border transition-all active:scale-95 ${
+                <button onclick="selectSize(${size})" class="px-4 py-2 text-xs font-bold rounded-xl border transition-all active:scale-95 ${
                     selectedSize === size 
-                        ? 'bg-[#1a1a1a] text-white border-[#1a1a1a] shadow-md' 
-                        : 'bg-[#ebd8b0] text-[#1a1a1a] border-[#dec38e] hover:bg-[#d8ccaa]'
+                        ? 'bg-[#D4AF37] text-black border-[#D4AF37] shadow-lg shadow-[#D4AF37]/20 font-black' 
+                        : 'bg-[#181B24] text-gray-300 border-white/10 hover:border-white/30'
                 }">
                     EU ${size}
                 </button>
@@ -1409,7 +1464,7 @@
 
             updateCartUI();
             closeModal();
-            openCartDrawer(); // AUTOMATIC POPUP AFTER ADDING ITEM
+            openCartDrawer();
         }
 
         function removeFromCart(index) {
@@ -1438,25 +1493,25 @@
 
             if (cart.length === 0) {
                 cartItemsList.innerHTML = `
-                    <div class="text-center py-12 space-y-2">
-                        <p class="text-sm font-bold text-[#5c5035]">Your bag is empty</p>
-                        <p class="text-xs text-[#7a6b4c]">Add items from the store catalog to continue.</p>
+                    <div class="text-center py-16 space-y-2">
+                        <p class="text-sm font-bold text-gray-300">Your bag is empty</p>
+                        <p class="text-xs text-gray-500">Add grails from the store catalog to continue.</p>
                     </div>
                 `;
             } else {
                 cartItemsList.innerHTML = cart.map((item, idx) => `
-                    <div class="flex items-center justify-between bg-[#fcefd2] p-3 rounded-2xl border border-[#e5dcbe]">
-                        <div class="flex items-center gap-3">
-                            <div class="w-16 h-16 bg-[#f4eee0] rounded-xl p-1 flex items-center justify-center">
+                    <div class="flex items-center justify-between bg-[#161822] p-3.5 rounded-2xl border border-white/5">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-16 h-16 bg-[#1D202C] rounded-xl p-1.5 flex items-center justify-center flex-shrink-0">
                                 <img src="${item.image}" alt="${item.name}" class="max-h-full object-contain" />
                             </div>
                             <div>
-                                <h4 class="text-xs font-extrabold text-[#1a1a1a] line-clamp-1">${item.name}</h4>
-                                <p class="text-[11px] font-bold text-[#8c6b23]">EU ${item.selectedSize}</p>
-                                <p class="text-xs font-black text-[#1a1a1a]">₹${item.price.toLocaleString('en-IN')}</p>
+                                <h4 class="text-xs font-bold text-white line-clamp-1">${item.name}</h4>
+                                <p class="text-[11px] font-bold text-[#E6C687]">EU ${item.selectedSize}</p>
+                                <p class="text-xs font-black gold-text-gradient">₹${item.price.toLocaleString('en-IN')}</p>
                             </div>
                         </div>
-                        <button onclick="removeFromCart(${idx})" class="p-2 text-[#d9381e] hover:bg-[#ebd8b0] rounded-xl transition-colors active:scale-95">
+                        <button onclick="removeFromCart(${idx})" class="p-2 text-rose-400 hover:bg-rose-500/10 rounded-xl transition-colors active:scale-95">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                             </svg>
