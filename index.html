@@ -1364,3 +1364,384 @@
                 ]
             }
         ];
+
+        // Shuffle products randomly on every page refresh
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        shuffleArray(PRODUCTS);
+
+        const BRANDS = ["ALL COLLECTION", "NIKE", "ADIDAS", "ASICS", "PUMA", "ONITSUKA", "VANS", "CONVERSE"];
+
+        let selectedBrand = "ALL COLLECTION";
+        let searchQuery = "";
+        let cart = [];
+        let selectedSize = null;
+        let activeModalIndex = null;
+        let autoScrollTimer = null;
+
+        function copyText(text, btnElement) {
+            navigator.clipboard.writeText(text).then(() => {
+                const original = btnElement.innerText;
+                btnElement.innerText = "✓ COPIED!";
+                btnElement.classList.remove('bg-[#D4AF37]');
+                btnElement.classList.add('bg-emerald-500', 'text-white');
+                setTimeout(() => {
+                    btnElement.innerText = original;
+                    btnElement.classList.remove('bg-emerald-500', 'text-white');
+                    btnElement.classList.add('bg-[#D4AF37]');
+                }, 1500);
+            }).catch(() => {
+                const el = document.createElement('textarea');
+                el.value = text;
+                document.body.appendChild(el);
+                el.select();
+                document.execCommand('copy');
+                document.body.removeChild(el);
+                btnElement.innerText = "✓ COPIED!";
+                setTimeout(() => { btnElement.innerText = "📋 COPY"; }, 1500);
+            });
+        }
+
+        function getBrandCount(brand) {
+            if (brand === "ALL COLLECTION") return PRODUCTS.length;
+            const filterKey = brand.toUpperCase();
+            return PRODUCTS.filter(p => {
+                const nameUpper = p.name.toUpperCase();
+                if (filterKey === "ASICS" && (nameUpper.includes("ONITSUKA") || nameUpper.includes("ASICS"))) return true;
+                if (filterKey === "NIKE" && (nameUpper.includes("NIKE") || nameUpper.includes("JORDAN") || nameUpper.includes("AIRFORCE"))) return true;
+                return nameUpper.includes(filterKey);
+            }).length;
+        }
+
+        function renderBrandFilters() {
+            const container = document.getElementById('brand-filters');
+            container.innerHTML = BRANDS.map(brand => {
+                const count = getBrandCount(brand);
+                return `
+                    <button onclick="setBrand('${brand}')" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all active:scale-95 ${
+                        selectedBrand === brand 
+                            ? 'bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-black shadow-lg shadow-[#D4AF37]/10' 
+                            : 'bg-[#13151C] text-gray-400 border border-white/5 hover:border-white/20 hover:text-white'
+                    }">
+                        ${brand} <span class="opacity-80 font-mono ml-1">(${count})</span>
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function setBrand(brand) {
+            selectedBrand = brand;
+            renderBrandFilters();
+            renderProducts();
+        }
+
+        function handleSearch(query) {
+            searchQuery = query;
+            renderProducts();
+        }
+
+        /* High-Visibility Studio Gallery Slider for Live Vault */
+        function renderHeroPreview() {
+            const container = document.getElementById('hero-preview');
+            const loopList = [...PRODUCTS, ...PRODUCTS, ...PRODUCTS];
+
+            container.innerHTML = loopList.map((p, index) => {
+                const originalIndex = index % PRODUCTS.length;
+                return `
+                    <div onclick="openModal(${originalIndex})" class="w-28 sm:w-32 h-28 sm:h-32 bg-[#F5F5F7] rounded-2xl border border-white/10 hover:border-[#D4AF37] cursor-pointer transition-all flex-shrink-0 active:scale-95 group relative flex items-center justify-center p-1 overflow-hidden shadow-lg">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-contain scale-[2.2] group-hover:scale-[2.4] transition-transform duration-300 drop-shadow-[0_4px_8px_rgba(0,0,0,0.2)]" />
+                    </div>
+                `;
+            }).join('');
+
+            startHeroAutoScroll();
+        }
+
+        /* Smooth Mobile & Desktop Touch-Friendly Auto Scroll */
+        function startHeroAutoScroll() {
+            const container = document.getElementById('hero-preview');
+            if (!container) return;
+
+            let isInteracting = false;
+            let resetTimeout;
+
+            const stopScroll = () => { isInteracting = true; clearTimeout(resetTimeout); };
+            const startScroll = () => {
+                clearTimeout(resetTimeout);
+                resetTimeout = setTimeout(() => { isInteracting = false; }, 1500);
+            };
+
+            container.onmouseenter = stopScroll;
+            container.onmouseleave = startScroll;
+            container.ontouchstart = stopScroll;
+            container.ontouchend = startScroll;
+
+            if (autoScrollTimer) clearInterval(autoScrollTimer);
+
+            autoScrollTimer = setInterval(() => {
+                if (!isInteracting && container) {
+                    const maxScroll = container.scrollWidth - container.clientWidth;
+                    if (maxScroll > 5) {
+                        container.scrollLeft += 1;
+                        if (container.scrollLeft >= maxScroll - 2) {
+                            container.scrollLeft = 0;
+                        }
+                    }
+                }
+            }, 20);
+        }
+
+        function renderProducts() {
+            const container = document.getElementById('product-grid');
+            
+            // 1. Brand Filter
+            let displayList = selectedBrand === "ALL COLLECTION" 
+                ? PRODUCTS.map((p, origIdx) => ({ ...p, origIdx }))
+                : PRODUCTS
+                    .map((p, origIdx) => ({ ...p, origIdx }))
+                    .filter(p => {
+                        const filterKey = selectedBrand.toUpperCase();
+                        const nameUpper = p.name.toUpperCase();
+                        if (filterKey === "ASICS" && (nameUpper.includes("ONITSUKA") || nameUpper.includes("ASICS"))) return true;
+                        if (filterKey === "NIKE" && (nameUpper.includes("NIKE") || nameUpper.includes("JORDAN") || nameUpper.includes("AIRFORCE"))) return true;
+                        return nameUpper.includes(filterKey);
+                    });
+
+            // 2. Search Query Filter
+            if (searchQuery.trim() !== "") {
+                const q = searchQuery.toLowerCase();
+                displayList = displayList.filter(p => p.name.toLowerCase().includes(q));
+            }
+
+            if (displayList.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full py-16 text-center text-gray-500 font-medium">
+                        No products match your search or filter.
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = displayList.map(p => `
+                <div onclick="openModal(${p.origIdx})" class="group w-full glass-card rounded-2xl sm:rounded-3xl p-2.5 sm:p-3.5 border border-white/5 shadow-xl flex flex-col justify-between space-y-2.5 cursor-pointer gold-border-glow transition-all active:scale-[0.98]">
+                    
+                    <!-- HIGH-VISIBILITY CROP-ZOOMED SNEAKER DISPLAY -->
+                    <div class="relative w-full bg-[#F5F5F7] rounded-xl sm:rounded-2xl p-1 flex items-center justify-center aspect-square overflow-hidden shadow-inner">
+                        <span class="absolute top-2 left-2 z-10 text-[8px] sm:text-[9px] font-black uppercase tracking-widest bg-black/85 text-[#E6C687] px-2 py-0.5 rounded border border-[#D4AF37]/30 backdrop-blur-md">
+                            ${p.badge}
+                        </span>
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-contain scale-[2.3] sm:scale-[2.1] transform group-hover:scale-[2.5] transition-transform duration-500 drop-shadow-[0_10px_20px_rgba(0,0,0,0.2)]" />
+                    </div>
+
+                    <div class="space-y-0.5 px-0.5">
+                        <h3 class="text-[11px] sm:text-xs font-bold tracking-tight text-white line-clamp-1 group-hover:text-[#E6C687] transition-colors">${p.name}</h3>
+                        <p class="text-xs sm:text-base font-black gold-text-gradient">₹${p.price.toLocaleString('en-IN')}</p>
+                    </div>
+
+                    <button onclick="event.stopPropagation(); openModal(${p.origIdx})" class="w-full bg-[#1A1D26] hover:bg-gradient-to-r hover:from-[#D4AF37] hover:to-[#AA7C11] text-gray-200 hover:text-black font-extrabold text-[9px] sm:text-[11px] uppercase tracking-wider py-2 sm:py-2.5 rounded-xl transition-all border border-white/5 active:scale-95">
+                        ADD TO BAG / DETAILS
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function openModal(index) {
+            activeModalIndex = index;
+            const p = PRODUCTS[index];
+            if (!p) return;
+
+            document.getElementById('modal-image').src = p.image;
+            document.getElementById('modal-badge').innerText = p.badge;
+            document.getElementById('modal-title').innerText = p.name;
+            document.getElementById('modal-price').innerText = `₹${p.price.toLocaleString('en-IN')}`;
+
+            const descContainer = document.getElementById('modal-description');
+            if (Array.isArray(p.description)) {
+                descContainer.innerHTML = p.description.map(pt => `
+                    <li class="flex items-start gap-2">
+                        <span class="text-[#D4AF37] font-black text-xs leading-none">•</span>
+                        <span>${pt}</span>
+                    </li>
+                `).join('');
+            } else {
+                descContainer.innerHTML = `
+                    <li class="flex items-start gap-2">
+                        <span class="text-[#D4AF37] font-black text-xs leading-none">•</span>
+                        <span>${p.description}</span>
+                    </li>
+                `;
+            }
+
+            selectedSize = p.sizes[0];
+            renderSizes(p.sizes);
+
+            document.getElementById('product-modal').classList.remove('hidden');
+        }
+
+        function renderSizes(sizes) {
+            const container = document.getElementById('modal-sizes');
+            container.innerHTML = sizes.map(size => `
+                <button onclick="selectSize(${size})" class="px-4 py-2 text-xs font-bold rounded-xl border transition-all active:scale-95 ${
+                    selectedSize === size 
+                        ? 'bg-[#D4AF37] text-black border-[#D4AF37] shadow-lg shadow-[#D4AF37]/20 font-black' 
+                        : 'bg-[#181B24] text-gray-300 border-white/10 hover:border-white/30'
+                }">
+                    EU ${size}
+                </button>
+            `).join('');
+        }
+
+        function selectSize(size) {
+            selectedSize = size;
+            if (activeModalIndex !== null && PRODUCTS[activeModalIndex]) {
+                renderSizes(PRODUCTS[activeModalIndex].sizes);
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('product-modal').classList.add('hidden');
+        }
+
+        function addToCart() {
+            if (activeModalIndex === null || !PRODUCTS[activeModalIndex]) return;
+            const product = PRODUCTS[activeModalIndex];
+
+            cart.push({
+                ...product,
+                selectedSize: selectedSize || product.sizes[0]
+            });
+
+            updateCartUI();
+            closeModal();
+            openCartDrawer();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const cartCountBadge = document.getElementById('cart-count');
+            const drawerCountBadge = document.getElementById('drawer-cart-count');
+            const cartItemsList = document.getElementById('cart-items-list');
+            const cartTotalPrice = document.getElementById('cart-total-price');
+
+            const totalItems = cart.length;
+            drawerCountBadge.innerText = totalItems;
+
+            if (totalItems > 0) {
+                cartCountBadge.innerText = totalItems;
+                cartCountBadge.classList.remove('hidden');
+            } else {
+                cartCountBadge.classList.add('hidden');
+            }
+
+            const totalSum = cart.reduce((acc, item) => acc + item.price, 0);
+            cartTotalPrice.innerText = `₹${totalSum.toLocaleString('en-IN')}`;
+
+            if (cart.length === 0) {
+                cartItemsList.innerHTML = `
+                    <div class="text-center py-16 space-y-2">
+                        <p class="text-sm font-bold text-gray-300">Your bag is empty</p>
+                        <p class="text-xs text-gray-500">Add grails from the store catalog to continue.</p>
+                    </div>
+                `;
+            } else {
+                cartItemsList.innerHTML = cart.map((item, idx) => `
+                    <div class="flex items-center justify-between bg-[#161822] p-3.5 rounded-2xl border border-white/5">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-16 h-16 bg-[#F5F5F7] rounded-xl p-1 flex items-center justify-center flex-shrink-0 overflow-hidden">
+                                <img src="${item.image}" alt="${item.name}" class="w-full h-full object-contain scale-[2.2]" />
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-bold text-white line-clamp-1">${item.name}</h4>
+                                <p class="text-[11px] font-bold text-[#E6C687]">EU ${item.selectedSize}</p>
+                                <p class="text-xs font-black gold-text-gradient">₹${item.price.toLocaleString('en-IN')}</p>
+                            </div>
+                        </div>
+                        <button onclick="removeFromCart(${idx})" class="p-2 text-rose-400 hover:bg-rose-500/10 rounded-xl transition-colors active:scale-95">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                        </button>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function openCartDrawer() {
+            updateCartUI();
+            document.getElementById('cart-drawer').classList.remove('hidden');
+        }
+
+        function closeCartDrawer() {
+            document.getElementById('cart-drawer').classList.add('hidden');
+        }
+
+        function openAddressModal() {
+            if (cart.length === 0) {
+                alert("Your bag is empty! Add items to continue.");
+                return;
+            }
+            closeCartDrawer();
+            document.getElementById('address-modal').classList.remove('hidden');
+        }
+
+        function closeAddressModal() {
+            document.getElementById('address-modal').classList.add('hidden');
+        }
+
+        function confirmOrderAndRedirect(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('cust-name').value.trim();
+            const phone = document.getElementById('cust-phone').value.trim();
+            const address = document.getElementById('cust-address').value.trim();
+            const city = document.getElementById('cust-city').value.trim();
+            const pincode = document.getElementById('cust-pincode').value.trim();
+            const screenshotInput = document.getElementById('cust-screenshot');
+            const hasScreenshot = screenshotInput.files && screenshotInput.files.length > 0;
+
+            let msg = "Hello ASIRO ELITE! I want to order:\n\n";
+            cart.forEach((item, index) => {
+                msg += `${index + 1}. ${item.name} - Size: EU ${item.selectedSize} - ₹${item.price.toLocaleString('en-IN')}\n`;
+            });
+
+            const total = cart.reduce((acc, item) => acc + item.price, 0);
+            msg += `\nTotal Amount: ₹${total.toLocaleString('en-IN')}\n`;
+
+            msg += `\n--- DELIVERY ADDRESS ---`;
+            msg += `\nName: ${name}`;
+            msg += `\nPhone: ${phone}`;
+            msg += `\nAddress: ${address}`;
+            msg += `\nCity/State: ${city}`;
+            msg += `\nPincode: ${pincode}`;
+
+            if (hasScreenshot) {
+                msg += `\n\n(I will attach my payment screenshot in this WhatsApp chat)`;
+            } else {
+                msg += `\n\n(Payment Status: Pending confirmation)`;
+            }
+
+            msg += `\n\nPlease confirm my order!`;
+
+            const storePhone = "918590614248"; 
+            window.open(`https://wa.me/${storePhone}?text=${encodeURIComponent(msg)}`, '_blank');
+
+            closeAddressModal();
+        }
+
+        renderBrandFilters();
+        renderHeroPreview();
+        renderProducts();
+        updateCartUI();
+    </script>
+</body>
+</html>
