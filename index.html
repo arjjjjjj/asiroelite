@@ -86,7 +86,7 @@
         <!-- Top Luxury Banner -->
         <div class="w-full bg-gradient-to-r from-[#000000] via-[#16181F] to-[#000000] border-b border-[#D4AF37]/20 py-2 px-4 text-center text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase flex items-center justify-center gap-2 text-[#E6C687]">
             <span class="inline-block w-1.5 h-1.5 rounded-full bg-[#D4AF37] animate-ping"></span>
-            <span>OG BOX INCLUDED ON ALL ORDERS</span>
+            <span>DIRECT INSTANT UPI PAYMENT • OG BOX INCLUDED ON ALL ORDERS</span>
         </div>
 
         <!-- Sticky Glass Header -->
@@ -134,15 +134,17 @@
                         </h1>
                         
                         <p class="text-xs sm:text-sm text-gray-400 font-normal leading-relaxed max-w-md">
+                            Hand-inspected 1:1 mirror quality luxury footwear. Express nationwide DTDC shipping with full size-exchange guarantee.
                         </p>
                     </div>
 
-                    <!-- Auto-Moving Hero Product Slider -->
+                    <!-- Pure Image Live Vault Slider -->
                     <div class="w-full lg:max-w-md overflow-hidden pt-2">
                         <div class="flex items-center justify-between pb-2 px-1">
-                            <span class="text-[10px] font-bold tracking-widest text-[#E6C687] uppercase">🔥 LIVE VAULT PREVIEW</span>
+                            <span class="text-[10px] font-bold tracking-widest text-[#E6C687] uppercase">🔥 LIVE VAULT GALLERY</span>
+                            <span class="text-[10px] font-medium text-gray-500">Swipe or tap to view</span>
                         </div>
-                        <div id="hero-preview" class="flex gap-3 overflow-x-auto no-scrollbar py-2 scroll-smooth"></div>
+                        <div id="hero-preview" class="flex gap-3 overflow-x-auto no-scrollbar py-2 touch-pan-x"></div>
                     </div>
                 </div>
             </div>
@@ -207,7 +209,7 @@
 
     </div>
 
-    <!-- PRODUCT DETAIL MODAL -->
+    <!-- PRODUCT DETAIL MODAL (ZOOMED-IN IMAGE LAYOUT) -->
     <div id="product-modal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
         <div class="relative w-full max-w-4xl bg-[#0F1117] text-white rounded-3xl shadow-2xl overflow-hidden my-auto border border-[#D4AF37]/30 flex flex-col md:flex-row max-h-[90vh] md:max-h-none overflow-y-auto">
             
@@ -218,9 +220,9 @@
             </button>
 
             <!-- Zoomed Product Image Display -->
-            <div class="w-full md:w-1/2 bg-gradient-to-b from-[#181B24] to-[#0F1117] p-4 sm:p-6 flex items-center justify-center min-h-[300px] sm:min-h-[400px] overflow-hidden border-b md:border-b-0 md:border-r border-white/5 relative">
+            <div class="w-full md:w-1/2 bg-gradient-to-b from-[#181B24] to-[#0F1117] p-2 sm:p-4 flex items-center justify-center min-h-[300px] sm:min-h-[380px] overflow-hidden border-b md:border-b-0 md:border-r border-white/5 relative">
                 <div class="ambient-glow"></div>
-                <img id="modal-image" src="" alt="" class="relative z-10 w-full h-full max-h-[360px] sm:max-h-[420px] object-contain scale-110 transform transition-transform duration-300 drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)]" />
+                <img id="modal-image" src="" alt="" class="relative z-10 w-full h-full max-h-[350px] sm:max-h-[420px] object-cover sm:object-contain scale-125 sm:scale-110 transform transition-transform duration-300 drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)]" />
             </div>
 
             <div class="w-full md:w-1/2 p-6 sm:p-8 flex flex-col justify-between space-y-6">
@@ -1303,6 +1305,7 @@
             renderProducts();
         }
 
+        /* Pure Sneaker Image Gallery Slider for Live Vault */
         function renderHeroPreview() {
             const container = document.getElementById('hero-preview');
             const loopList = [...PRODUCTS, ...PRODUCTS, ...PRODUCTS];
@@ -1310,12 +1313,8 @@
             container.innerHTML = loopList.map((p, index) => {
                 const originalIndex = index % PRODUCTS.length;
                 return `
-                    <div onclick="openModal(${originalIndex})" class="min-w-[130px] sm:min-w-[150px] bg-[#161822] p-3 rounded-2xl border border-white/10 cursor-pointer hover:border-[#D4AF37]/50 transition-all flex-shrink-0 active:scale-95 group">
-                        <div class="w-full h-20 sm:h-24 bg-[#1A1D28] rounded-xl p-2 flex items-center justify-center mb-2">
-                            <img src="${p.image}" alt="${p.name}" class="max-h-full object-contain pointer-events-none group-hover:scale-105 transition-transform" />
-                        </div>
-                        <p class="text-[11px] font-bold text-white line-clamp-1">${p.name}</p>
-                        <p class="text-[11px] font-black gold-text-gradient">₹${p.price.toLocaleString('en-IN')}</p>
+                    <div onclick="openModal(${originalIndex})" class="min-w-[110px] sm:min-w-[130px] aspect-square bg-gradient-to-b from-[#181B26] to-[#0F1118] p-2.5 rounded-2xl border border-white/10 hover:border-[#D4AF37] cursor-pointer transition-all flex-shrink-0 active:scale-95 group relative flex items-center justify-center shadow-lg">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-contain pointer-events-none group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_8px_12px_rgba(0,0,0,0.8)]" />
                     </div>
                 `;
             }).join('');
@@ -1323,29 +1322,38 @@
             startHeroAutoScroll();
         }
 
+        /* Smooth Mobile & Desktop Touch-Friendly Auto Scroll */
         function startHeroAutoScroll() {
             const container = document.getElementById('hero-preview');
             if (!container) return;
 
-            let isHovered = false;
-            container.onmouseenter = () => isHovered = true;
-            container.onmouseleave = () => isHovered = false;
-            container.ontouchstart = () => isHovered = true;
-            container.ontouchend = () => isHovered = false;
+            let isInteracting = false;
+            let resetTimeout;
+
+            const stopScroll = () => { isInteracting = true; clearTimeout(resetTimeout); };
+            const startScroll = () => {
+                clearTimeout(resetTimeout);
+                resetTimeout = setTimeout(() => { isInteracting = false; }, 1500);
+            };
+
+            container.onmouseenter = stopScroll;
+            container.onmouseleave = startScroll;
+            container.ontouchstart = stopScroll;
+            container.ontouchend = startScroll;
 
             if (autoScrollTimer) clearInterval(autoScrollTimer);
 
             autoScrollTimer = setInterval(() => {
-                if (!isHovered && container) {
+                if (!isInteracting && container) {
                     const maxScroll = container.scrollWidth - container.clientWidth;
-                    if (maxScroll > 10) {
+                    if (maxScroll > 5) {
                         container.scrollLeft += 1;
-                        if (container.scrollLeft >= maxScroll - 5) {
+                        if (container.scrollLeft >= maxScroll - 2) {
                             container.scrollLeft = 0;
                         }
                     }
                 }
-            }, 25);
+            }, 20);
         }
 
         function renderProducts() {
