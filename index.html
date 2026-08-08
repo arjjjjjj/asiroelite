@@ -3,23 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ASIRO ELITE | Archival Grails & Authenticated Sneakers</title>
+    <title>ASIRO ELITE | Authentic Sneakers & Grails</title>
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Google Fonts for Luxury Streetwear Aesthetics -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 
-    <!-- Custom High-Fashion Styling -->
+    <!-- Custom Styling & Theme Engine -->
     <style>
         :root {
-            --gold: #D4AF37;
-            --gold-light: #F3E5AB;
-            --gold-gradient: linear-gradient(135deg, #FFF5D1 0%, #D4AF37 50%, #997415 100%);
-            --vault-glow: 0 0 35px rgba(212, 175, 55, 0.12);
+            --gold-gradient: linear-gradient(135deg, #FFF2D1 0%, #D4AF37 50%, #AA7C11 100%);
+            --gold-glow: 0 0 25px rgba(212, 175, 55, 0.15);
         }
 
         body {
@@ -44,17 +42,16 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .gold-border-glow {
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
         .gold-border-glow:hover {
-            border-color: rgba(212, 175, 55, 0.5);
-            box-shadow: var(--vault-glow);
+            border-color: rgba(212, 175, 55, 0.6);
+            box-shadow: var(--gold-glow);
         }
 
-        .studio-tile {
-            background: radial-gradient(circle at center, #FFFFFF 0%, #E8E8EC 100%);
+        .glass-card {
+            background: rgba(18, 20, 26, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .no-scrollbar::-webkit-scrollbar {
@@ -65,25 +62,14 @@
             scrollbar-width: none;
         }
 
-        /* Ambient Noise & Glow */
+        /* Ambient Background Glow */
         .ambient-glow {
             position: absolute;
-            width: 350px;
-            height: 350px;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, rgba(5, 5, 7, 0) 70%);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, rgba(5, 5, 7, 0) 70%);
             pointer-events: none;
             z-index: 0;
-        }
-
-        /* Running Ticker Animation */
-        @keyframes ticker {
-            0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(-50%, 0, 0); }
-        }
-        .animate-ticker {
-            display: flex;
-            width: 200%;
-            animation: ticker 25s linear infinite;
         }
 
         @media screen and (max-width: 640px) {
@@ -97,145 +83,164 @@
 
     <div class="relative w-full min-h-screen flex flex-col items-center overflow-hidden">
 
-        <!-- Marquee Ticker -->
-        <div class="w-full bg-[#0D0E12] border-b border-[#D4AF37]/20 py-2 overflow-hidden whitespace-nowrap">
-            <div class="animate-ticker text-[10px] font-extrabold tracking-[0.25em] text-[#E6C687] uppercase flex items-center gap-8">
-                <span>✦ ASIRO ELITE ARCHIVAL VAULT</span>
-                <span>• 1:1 MIRROR SHOWROOM QUALITY</span>
-                <span>✦ DIRECT INSTANT UPI PREPAID ORDERS</span>
-                <span>• NATIONWIDE DTDC EXPRESS SHIPPING</span>
-                <span>✦ OG BOX INCLUDED ON ALL ORDERS</span>
-                <span>✦ ASIRO ELITE ARCHIVAL VAULT</span>
-                <span>• 1:1 MIRROR SHOWROOM QUALITY</span>
-                <span>✦ DIRECT INSTANT UPI PREPAID ORDERS</span>
-                <span>• NATIONWIDE DTDC EXPRESS SHIPPING</span>
-                <span>✦ OG BOX INCLUDED ON ALL ORDERS</span>
-            </div>
-        </div>
-
-        <!-- Sticky Luxury Header -->
+        <!-- Sticky Glass Header -->
         <header class="sticky top-0 z-40 w-full max-w-7xl px-4 sm:px-8 py-4 flex items-center justify-between backdrop-blur-xl bg-[#050507]/85 border-b border-white/10">
             <div class="flex items-center gap-3">
                 <a href="#" class="flex flex-col">
                     <span class="font-syne font-black text-2xl sm:text-3xl tracking-wider text-white leading-none">
                         ASIRO<span class="gold-text-gradient font-normal">ELITE</span>
                     </span>
-                    <span class="text-[8px] font-mono tracking-[0.3em] text-[#D4AF37] uppercase pt-0.5">ARCHIVAL BOUTIQUE</span>
+                    <span class="text-[8px] font-mono tracking-[0.3em] text-[#D4AF37] uppercase pt-0.5">EST 2026</span>
                 </a>
             </div>
 
             <!-- Cart Trigger Button -->
-            <button id="cart-btn" onclick="openCartDrawer()" class="relative px-4 py-2.5 bg-[#12141C] text-white rounded-full border border-[#D4AF37]/30 hover:border-[#D4AF37] transition-all active:scale-95 flex items-center gap-2.5">
-                <svg class="w-4 h-4 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+            <button id="cart-btn" onclick="openCartDrawer()" class="relative p-2.5 bg-[#13151C] text-white rounded-full border border-white/10 hover:border-[#D4AF37]/50 transition-all active:scale-95 group">
+                <svg class="w-5 h-5 text-gray-300 group-hover:text-[#D4AF37] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                 </svg>
-                <span class="text-xs font-bold tracking-wider hidden sm:inline text-gray-200">BAG</span>
-                <span id="cart-count" class="hidden bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-black text-[10px] font-black px-2 py-0.5 rounded-full shadow-md">0</span>
+                <span id="cart-count" class="hidden absolute -top-1 -right-1 bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-black text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-lg">0</span>
             </button>
         </header>
 
         <!-- Main Content -->
-        <main class="relative z-10 w-full max-w-7xl px-3 sm:px-6 py-6 sm:py-10 space-y-8 sm:space-y-12">
+        <main class="relative z-10 w-full max-w-7xl px-3 sm:px-6 py-4 sm:py-8 space-y-6 sm:space-y-10">
             
-            <!-- Editorial Hero Showcase -->
-            <div class="relative w-full rounded-3xl p-6 sm:p-12 overflow-hidden border border-[#D4AF37]/25 bg-gradient-to-br from-[#0F1117] via-[#090A0E] to-[#050507] shadow-2xl">
+            <!-- Hero Showcase Banner -->
+            <div class="relative w-full rounded-3xl p-5 sm:p-10 overflow-hidden border border-[#D4AF37]/20 bg-gradient-to-br from-[#12141A] via-[#0D0E12] to-[#08080A] shadow-2xl">
                 <div class="ambient-glow -top-20 -left-20"></div>
                 <div class="ambient-glow -bottom-20 -right-20"></div>
 
-                <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
-                    <div class="w-full lg:max-w-xl space-y-4 text-left">
-                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#D4AF37]/10 rounded-full border border-[#D4AF37]/30 text-[#E6C687] text-[10px] font-black tracking-[0.2em] uppercase">
-                            <span class="w-1.5 h-1.5 rounded-full bg-[#D4AF37] animate-pulse"></span>
-                            AUTHENTICATED VAULT DROP
-                        </div>
+                <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-6">
+                    <div class="w-full lg:max-w-xl space-y-3.5 text-left">
+                        <span class="inline-block text-[10px] font-black tracking-widest uppercase px-3 py-1 bg-[#D4AF37]/10 text-[#E6C687] rounded-full border border-[#D4AF37]/30">
+                            VIP SNEAKER VAULT
+                        </span>
                         
-                        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-none text-white font-syne">
-                            RARE GRAILS.<br />
-                            <span class="font-serif-luxury italic font-normal gold-text-gradient">UNCOMPROMISED.</span>
+                        <h1 class="text-2xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-none text-white font-syne">
+                            AUTHENTIC GRAILS.<br />
+                            <span class="font-serif-luxury italic font-normal gold-text-gradient">CURATED FOR ELITES.</span>
                         </h1>
                         
-                        <p class="text-xs sm:text-sm text-gray-400 font-medium leading-relaxed max-w-md">
-                            Strictly curated 1:1 mirror quality sneakers. Hand-verified materials, original box included, fast DTDC express shipping across India.
+                        <p class="text-xs sm:text-sm text-gray-400 font-normal leading-relaxed max-w-md">
+                            Hand-inspected 1:1 mirror quality luxury footwear delivered nationwide.
                         </p>
                     </div>
 
-                    <!-- Compact Gallery Slider -->
-                    <div class="w-full lg:max-w-md overflow-hidden">
-                        <div class="flex items-center justify-between pb-2.5 px-1 border-b border-white/10 mb-3">
-                            <span class="text-[10px] font-extrabold tracking-[0.2em] text-[#E6C687] uppercase">ARCHIVE PREVIEW</span>
-                            <span class="text-[10px] text-gray-500 font-mono">SWIPE VIA TOUCH</span>
+                    <!-- Zoomed-In Studio Live Vault Gallery Slider -->
+                    <div class="w-full lg:max-w-md overflow-hidden pt-1">
+                        <div class="flex items-center justify-between pb-2 px-1">
+                            <span class="text-[10px] font-bold tracking-widest text-[#E6C687] uppercase">🔥 LIVE VAULT GALLERY</span>
+                            <span class="text-[10px] font-medium text-gray-500">Swipe to browse</span>
                         </div>
-                        <div id="hero-preview" class="flex gap-3 overflow-x-auto no-scrollbar py-1 touch-pan-x"></div>
+                        <div id="hero-preview" class="flex gap-2.5 overflow-x-auto no-scrollbar py-1 touch-pan-x"></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Brand Filter Navigation -->
-            <div class="w-full space-y-3 pt-2">
-                <div class="flex justify-between items-center px-1">
-                    <span class="text-xs font-black text-[#E6C687] tracking-[0.2em] uppercase font-mono">[ 01 // BRAND CATEGORIES ]</span>
+            <!-- Trust Badges Banner -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div class="glass-card p-3.5 rounded-2xl flex items-center gap-3 border border-white/5 hover:border-[#D4AF37]/30 transition-all">
+                    <div class="p-2.5 bg-[#1A1D26] text-[#E6C687] rounded-xl border border-white/10 flex-shrink-0">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="font-bold text-xs text-white uppercase tracking-wider">Express DTDC Delivery</p>
+                        <p class="text-[11px] text-gray-400">Fast nationwide shipping with tracking</p>
+                    </div>
                 </div>
-                <div id="brand-filters" class="w-full flex gap-2.5 overflow-x-auto no-scrollbar pb-1"></div>
+
+                <div class="glass-card p-3.5 rounded-2xl flex items-center gap-3 border border-white/5 hover:border-[#D4AF37]/30 transition-all">
+                    <div class="p-2.5 bg-[#1A1D26] text-[#E6C687] rounded-xl border border-white/10 flex-shrink-0">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="font-bold text-xs text-white uppercase tracking-wider">Easy Size Exchange</p>
+                        <p class="text-[11px] text-gray-400">Hassle-free sizing & quality support</p>
+                    </div>
+                </div>
+
+                <div class="glass-card p-3.5 rounded-2xl flex items-center gap-3 border border-white/5 hover:border-[#D4AF37]/30 transition-all">
+                    <div class="p-2.5 bg-[#1A1D26] text-[#E6C687] rounded-xl border border-white/10 flex-shrink-0">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="font-bold text-xs text-white uppercase tracking-wider">100% Authentic Quality</p>
+                        <p class="text-[11px] text-gray-400">Legit-checked sneakers with OG Box included</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Brand Filter Bar -->
+            <div class="w-full space-y-2.5 pt-1">
+                <div class="flex justify-between items-center px-1">
+                    <span class="text-xs font-bold text-[#E6C687] tracking-widest uppercase">• FILTER BY BRAND</span>
+                </div>
+                <div id="brand-filters" class="w-full flex gap-2 overflow-x-auto no-scrollbar pb-1"></div>
             </div>
 
             <!-- Product Grid -->
-            <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-6"></div>
+            <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6"></div>
 
         </main>
 
-        <!-- Luxury Footer -->
-        <footer class="w-full border-t border-white/10 mt-16 py-10 text-center text-xs font-medium text-gray-500 space-y-3 bg-[#030305]">
-            <p class="tracking-widest text-gray-400 font-mono uppercase text-[10px]">🚚 DTDC EXPRESS SHIPPING • EASY SIZE EXCHANGE SUPPORT</p>
-            <p class="text-[11px] font-serif-luxury text-[#E6C687]/70">© 2026 ASIRO ELITE. ALL RIGHTS RESERVED. VERIFIED AUTHENTIC GRAILS.</p>
+        <!-- Footer -->
+        <footer class="w-full border-t border-white/5 mt-12 py-8 text-center text-xs font-medium text-gray-500 space-y-2 bg-[#050507]">
+            <p class="tracking-wider text-gray-400">🚚 Shipping Partner: Express DTDC Delivery | 🔄 Size Exchange Support Available</p>
+            <p class="text-[11px] font-serif-luxury text-[#E6C687]/60">© 2026 ASIRO ELITE. All Rights Reserved. Verified Authentic Grails.</p>
         </footer>
 
     </div>
 
-    <!-- PRODUCT DETAIL MODAL (ADD TO BAG & SIZE ABOVE HIGHLIGHTS) -->
-    <div id="product-modal" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-lg flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
-        <div class="relative w-full max-w-4xl bg-[#0A0C10] text-white rounded-3xl shadow-2xl overflow-hidden my-auto border border-[#D4AF37]/30 flex flex-col md:flex-row max-h-[92vh] md:max-h-none overflow-y-auto">
+    <!-- PRODUCT DETAIL MODAL (SIZE & ADD TO BAG ABOVE HIGHLIGHTS) -->
+    <div id="product-modal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+        <div class="relative w-full max-w-4xl bg-[#0F1117] text-white rounded-3xl shadow-2xl overflow-hidden my-auto border border-[#D4AF37]/30 flex flex-col md:flex-row max-h-[90vh] md:max-h-none overflow-y-auto">
             
-            <!-- Close Modal Button -->
-            <button onclick="closeModal()" class="absolute top-4 right-4 z-20 w-9 h-9 bg-[#161822] text-gray-300 rounded-full flex items-center justify-center hover:text-white hover:bg-[#222536] active:scale-95 transition-all border border-white/10">
+            <button onclick="closeModal()" class="absolute top-4 right-4 z-20 w-9 h-9 bg-[#1A1D26] text-gray-300 rounded-full flex items-center justify-center hover:text-white hover:bg-[#252936] active:scale-95 transition-all">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
 
-            <!-- Studio Sneaker Image Display -->
-            <div class="w-full md:w-1/2 studio-tile p-6 sm:p-8 flex items-center justify-center min-h-[280px] sm:min-h-[400px] overflow-hidden border-b md:border-b-0 md:border-r border-white/10 relative">
-                <img id="modal-image" src="" alt="" class="relative z-10 w-full h-full max-h-[320px] sm:max-h-[380px] object-contain transform hover:scale-105 transition-transform duration-500 drop-shadow-[0_20px_30px_rgba(0,0,0,0.25)]" />
+            <!-- Zoomed Product Image Display -->
+            <div class="w-full md:w-1/2 bg-[#F5F5F7] p-4 flex items-center justify-center min-h-[280px] sm:min-h-[380px] overflow-hidden border-b md:border-b-0 md:border-r border-white/5 relative">
+                <img id="modal-image" src="" alt="" class="w-full h-full max-h-[320px] sm:max-h-[380px] object-contain scale-[1.8] sm:scale-[1.5] transform transition-transform duration-300 drop-shadow-[0_15px_25px_rgba(0,0,0,0.2)]" />
             </div>
 
-            <!-- Content Panel -->
-            <div class="w-full md:w-1/2 p-6 sm:p-8 flex flex-col justify-between space-y-6">
-                <div class="space-y-5">
-                    <span id="modal-badge" class="inline-block text-[10px] font-black tracking-[0.2em] uppercase px-3 py-1 bg-[#D4AF37]/10 text-[#E6C687] rounded-full border border-[#D4AF37]/30"></span>
+            <div class="w-full md:w-1/2 p-6 sm:p-8 flex flex-col justify-between space-y-5">
+                <div class="space-y-4">
+                    <span id="modal-badge" class="inline-block text-[10px] font-black tracking-widest uppercase px-3 py-1 bg-[#D4AF37]/10 text-[#E6C687] rounded-full border border-[#D4AF37]/30"></span>
                     
                     <div>
-                        <h2 id="modal-title" class="text-xl sm:text-2xl font-black text-white leading-tight font-syne uppercase"></h2>
+                        <h2 id="modal-title" class="text-xl sm:text-3xl font-black text-white leading-tight"></h2>
                     </div>
                     
                     <p id="modal-price" class="text-2xl sm:text-3xl font-extrabold gold-text-gradient"></p>
                     
-                    <!-- 1. SELECT SIZE (EU) - PLACED DIRECTLY TOP -->
-                    <div class="space-y-2 pt-1 border-t border-white/10">
-                        <p class="text-[10px] font-black uppercase text-gray-300 tracking-[0.2em]">SELECT SIZE (EU)</p>
+                    <!-- 1. SELECT SIZE (EU) PLACED FIRST -->
+                    <div class="space-y-2 pt-1">
+                        <p class="text-[10px] font-black uppercase text-white tracking-widest">SELECT SIZE (EU)</p>
                         <div id="modal-sizes" class="flex flex-wrap gap-2"></div>
                     </div>
 
-                    <!-- 2. ADD TO BAG & CHECKOUT BUTTON - PLACED DIRECTLY BELOW SIZE -->
-                    <button onclick="addToCart()" class="w-full bg-gradient-to-r from-[#D4AF37] via-[#E6C687] to-[#AA7C11] hover:brightness-110 text-black font-extrabold text-xs uppercase tracking-[0.2em] py-4 rounded-2xl shadow-2xl transition-all active:scale-95 flex items-center justify-center gap-2">
+                    <!-- 2. ADD TO BAG & CHECKOUT BUTTON PLACED SECOND -->
+                    <button onclick="addToCart()" class="w-full bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] hover:from-[#E6C687] hover:to-[#D4AF37] text-black font-extrabold text-xs uppercase tracking-widest py-4 rounded-2xl shadow-xl transition-all active:scale-95 flex items-center justify-center gap-2">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                         </svg>
                         ADD TO BAG & CHECKOUT
                     </button>
 
-                    <!-- 3. PRODUCT HIGHLIGHTS - PLACED BELOW ACTION BUTTON -->
-                    <div class="space-y-2 pt-2 border-t border-white/10">
-                        <p class="text-[10px] font-black uppercase text-[#E6C687] tracking-[0.2em]">PRODUCT SPECIFICATIONS</p>
-                        <ul id="modal-description" class="space-y-2 text-xs text-gray-300 font-medium bg-[#12141E] p-4 rounded-2xl border border-white/5"></ul>
+                    <!-- 3. PRODUCT HIGHLIGHTS PLACED THIRD -->
+                    <div class="space-y-2 pt-2">
+                        <p class="text-[10px] font-black uppercase text-[#E6C687] tracking-widest">PRODUCT HIGHLIGHTS</p>
+                        <ul id="modal-description" class="space-y-2 text-xs text-gray-300 font-medium bg-[#161822] p-3.5 rounded-2xl border border-white/5"></ul>
                     </div>
                 </div>
             </div>
@@ -243,16 +248,16 @@
     </div>
 
     <!-- CART SLIDE-OVER DRAWER -->
-    <div id="cart-drawer" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex justify-end">
-        <div class="w-full max-w-md bg-[#0A0C10] text-white h-full shadow-2xl flex flex-col justify-between border-l border-white/10 p-5 sm:p-6 overflow-y-auto">
+    <div id="cart-drawer" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex justify-end">
+        <div class="w-full max-w-md bg-[#0F1117] text-white h-full shadow-2xl flex flex-col justify-between border-l border-white/10 p-5 sm:p-6 overflow-y-auto">
             
             <div class="space-y-6">
                 <div class="flex items-center justify-between border-b border-white/10 pb-4">
                     <div class="flex items-center gap-2">
-                        <h2 class="text-base font-black tracking-wider text-white font-syne">YOUR SHOPPING BAG</h2>
+                        <h2 class="text-lg font-black tracking-wider text-white">YOUR SHOPPING BAG</h2>
                         <span id="drawer-cart-count" class="text-xs font-bold bg-[#D4AF37] text-black px-2.5 py-0.5 rounded-full">0</span>
                     </div>
-                    <button onclick="closeCartDrawer()" class="p-2 bg-[#161822] text-gray-300 rounded-full hover:text-white transition-all">
+                    <button onclick="closeCartDrawer()" class="p-2 bg-[#1A1D26] text-gray-300 rounded-full hover:text-white transition-all">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                         </svg>
@@ -264,10 +269,10 @@
 
             <div class="border-t border-white/10 pt-5 space-y-4">
                 <div class="flex justify-between text-sm font-extrabold text-white">
-                    <span class="tracking-wider">TOTAL AMOUNT:</span>
-                    <span id="cart-total-price" class="gold-text-gradient text-base font-black">₹0</span>
+                    <span class="tracking-wider">TOTAL PRICE:</span>
+                    <span id="cart-total-price" class="gold-text-gradient text-base">₹0</span>
                 </div>
-                <button onclick="openAddressModal()" class="w-full bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-black font-extrabold text-xs uppercase tracking-[0.2em] py-4 rounded-2xl shadow-xl transition-all active:scale-95 flex items-center justify-center gap-2">
+                <button onclick="openAddressModal()" class="w-full bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-black font-extrabold text-xs uppercase tracking-widest py-4 rounded-2xl shadow-xl transition-all active:scale-95 flex items-center justify-center gap-2">
                     PROCEED TO CHECKOUT
                 </button>
             </div>
@@ -276,14 +281,14 @@
     </div>
 
     <!-- ADDRESS & PAYMENT DETAILS MODAL -->
-    <div id="address-modal" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
-        <div class="relative w-full max-w-lg bg-[#0A0C10] text-white rounded-3xl shadow-2xl p-6 border border-[#D4AF37]/30 space-y-5 my-auto max-h-[90vh] overflow-y-auto">
+    <div id="address-modal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+        <div class="relative w-full max-w-lg bg-[#0F1117] text-white rounded-3xl shadow-2xl p-6 border border-[#D4AF37]/30 space-y-5 my-auto max-h-[90vh] overflow-y-auto">
             <div class="flex justify-between items-center border-b border-white/10 pb-4">
                 <div>
-                    <h3 class="text-lg font-black tracking-wider text-white font-syne">CHECKOUT & PAYMENT</h3>
+                    <h3 class="text-lg font-black tracking-wider text-white">CHECKOUT & PAYMENT</h3>
                     <p class="text-[11px] text-gray-400">Complete delivery address and instant UPI payment</p>
                 </div>
-                <button onclick="closeAddressModal()" class="p-2 bg-[#161822] text-gray-300 rounded-full hover:text-white transition-all">
+                <button onclick="closeAddressModal()" class="p-2 bg-[#1A1D26] text-gray-300 rounded-full hover:text-white transition-all">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
@@ -296,24 +301,24 @@
                     <h4 class="text-xs font-black uppercase tracking-widest text-[#E6C687]">• 1. DELIVERY ADDRESS</h4>
                     <div>
                         <label class="block text-[11px] font-bold text-gray-300 mb-1">FULL NAME *</label>
-                        <input type="text" id="cust-name" required placeholder="e.g. Rahul Sharma" class="w-full px-4 py-3 bg-[#12141E] border border-white/10 rounded-xl text-xs font-semibold text-white focus:outline-none focus:border-[#D4AF37]" />
+                        <input type="text" id="cust-name" required placeholder="e.g. Rahul Sharma" class="w-full px-4 py-3 bg-[#161822] border border-white/10 rounded-xl text-xs font-semibold text-white focus:outline-none focus:border-[#D4AF37]" />
                     </div>
                     <div>
                         <label class="block text-[11px] font-bold text-gray-300 mb-1">PHONE / WHATSAPP NUMBER *</label>
-                        <input type="tel" id="cust-phone" required placeholder="e.g. 8590614248" class="w-full px-4 py-3 bg-[#12141E] border border-white/10 rounded-xl text-xs font-semibold text-white focus:outline-none focus:border-[#D4AF37]" />
+                        <input type="tel" id="cust-phone" required placeholder="e.g. 8590614248" class="w-full px-4 py-3 bg-[#161822] border border-white/10 rounded-xl text-xs font-semibold text-white focus:outline-none focus:border-[#D4AF37]" />
                     </div>
                     <div>
                         <label class="block text-[11px] font-bold text-gray-300 mb-1">COMPLETE STREET ADDRESS *</label>
-                        <textarea id="cust-address" required rows="2" placeholder="House/Flat No., Street Name, Area/Landmark" class="w-full px-4 py-3 bg-[#12141E] border border-white/10 rounded-xl text-xs font-semibold text-white focus:outline-none focus:border-[#D4AF37]"></textarea>
+                        <textarea id="cust-address" required rows="2" placeholder="House/Flat No., Street Name, Area/Landmark" class="w-full px-4 py-3 bg-[#161822] border border-white/10 rounded-xl text-xs font-semibold text-white focus:outline-none focus:border-[#D4AF37]"></textarea>
                     </div>
                     <div class="grid grid-cols-2 gap-3">
                         <div>
                             <label class="block text-[11px] font-bold text-gray-300 mb-1">CITY / STATE *</label>
-                            <input type="text" id="cust-city" required placeholder="e.g. Mumbai, MH" class="w-full px-4 py-3 bg-[#12141E] border border-white/10 rounded-xl text-xs font-semibold text-white focus:outline-none focus:border-[#D4AF37]" />
+                            <input type="text" id="cust-city" required placeholder="e.g. Mumbai, MH" class="w-full px-4 py-3 bg-[#161822] border border-white/10 rounded-xl text-xs font-semibold text-white focus:outline-none focus:border-[#D4AF37]" />
                         </div>
                         <div>
                             <label class="block text-[11px] font-bold text-gray-300 mb-1">PINCODE *</label>
-                            <input type="text" id="cust-pincode" required placeholder="e.g. 400001" class="w-full px-4 py-3 bg-[#12141E] border border-white/10 rounded-xl text-xs font-semibold text-white focus:outline-none focus:border-[#D4AF37]" />
+                            <input type="text" id="cust-pincode" required placeholder="e.g. 400001" class="w-full px-4 py-3 bg-[#161822] border border-white/10 rounded-xl text-xs font-semibold text-white focus:outline-none focus:border-[#D4AF37]" />
                         </div>
                     </div>
                 </div>
@@ -321,7 +326,7 @@
                 <!-- 2. Payment Details Section with Copy Buttons -->
                 <div class="space-y-3 pt-3 border-t border-white/10">
                     <h4 class="text-xs font-black uppercase tracking-widest text-[#E6C687]">• 2. PAY VIA UPI</h4>
-                    <div class="bg-[#12141E] p-4 rounded-2xl border border-white/10 space-y-3 text-xs">
+                    <div class="bg-[#161822] p-4 rounded-2xl border border-white/10 space-y-3 text-xs">
                         
                         <!-- UPI Number -->
                         <div class="flex justify-between items-center pb-2.5 border-b border-white/5">
@@ -360,18 +365,18 @@
                     <!-- Screenshot Upload -->
                     <div>
                         <label class="block text-[11px] font-bold text-gray-300 mb-1">UPLOAD PAYMENT SCREENSHOT</label>
-                        <input type="file" id="cust-screenshot" accept="image/*" class="w-full px-3 py-2 bg-[#12141E] border border-white/10 rounded-xl text-xs font-semibold text-gray-300 file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-black file:bg-[#D4AF37] file:text-black hover:file:bg-[#E6C687] cursor-pointer" />
+                        <input type="file" id="cust-screenshot" accept="image/*" class="w-full px-3 py-2 bg-[#161822] border border-white/10 rounded-xl text-xs font-semibold text-gray-300 file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-black file:bg-[#D4AF37] file:text-black hover:file:bg-[#E6C687] cursor-pointer" />
                     </div>
                 </div>
 
                 <!-- 3. Primary Action Button -->
-                <button type="submit" class="w-full bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-black font-extrabold text-xs uppercase tracking-[0.2em] py-4 rounded-2xl shadow-xl transition-all active:scale-95 flex items-center justify-center gap-2 mt-4">
+                <button type="submit" class="w-full bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-black font-extrabold text-xs uppercase tracking-widest py-4 rounded-2xl shadow-xl transition-all active:scale-95 flex items-center justify-center gap-2 mt-4">
                     CONFIRM & ORDER ON WHATSAPP
                 </button>
 
                 <!-- 4. Facing Issues WhatsApp Chat Box -->
                 <div class="pt-2 border-t border-white/10">
-                    <a href="https://wa.me/918590614248?text=Hello%20ASIRO%20ELITE!%20I%20am%20facing%20an%20issue%20with%20my%20order/payment." target="_blank" class="flex items-center justify-between p-3.5 bg-[#12141E] hover:bg-[#181B28] rounded-2xl border border-white/5 transition-all group active:scale-98">
+                    <a href="https://wa.me/918590614248?text=Hello%20ASIRO%20ELITE!%20I%20am%20facing%20an%20issue%20with%20my%20order/payment." target="_blank" class="flex items-center justify-between p-3.5 bg-[#161822] hover:bg-[#1C1F2D] rounded-2xl border border-white/5 transition-all group active:scale-98">
                         <div class="flex items-center gap-2.5">
                             <svg class="w-4 h-4 text-[#25D366] flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M12.031 2c-5.514 0-9.999 4.486-9.999 10.001 0 1.765.459 3.487 1.332 5.006l-1.364 4.993 5.111-1.34c1.468.8 3.123 1.222 4.92 1.222 5.514 0 9.999-4.486 9.999-10.001s-4.485-10.001-9.999-10.001zm5.95 14.182c-.252.708-1.261 1.341-1.74 1.385-.453.041-1.042.186-3.376-.731-2.836-1.114-4.636-4.004-4.777-4.195-.141-.191-1.149-1.53-1.149-2.92 0-1.391.731-2.072 1.002-2.353.271-.281.591-.352.788-.352.197 0 .394.002.563.01.18.008.423-.068.662.507.252.607.859 2.099.933 2.25.074.151.123.328.024.525-.098.197-.148.319-.295.492-.148.173-.311.386-.443.518-.148.148-.302.311-.131.605.172.293.763 1.26 1.637 2.039 1.125.999 2.072 1.309 2.365 1.457.293.148.468.123.64-.074.172-.197.738-.861.933-1.157.197-.295.394-.246.662-.148.271.098 1.722.812 2.017.96.295.148.492.222.563.344.07.123.07.708-.182 1.416z"/>
