@@ -38,20 +38,16 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .gold-border {
-            border: 1px solid rgba(212, 175, 55, 0.25);
-        }
-
         .gold-border-glow:hover {
             border-color: rgba(212, 175, 55, 0.6);
             box-shadow: var(--gold-glow);
         }
 
         .glass-card {
-            background: rgba(18, 20, 26, 0.75);
+            background: rgba(18, 20, 26, 0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .no-scrollbar::-webkit-scrollbar {
@@ -65,8 +61,8 @@
         /* Ambient Background Glow */
         .ambient-glow {
             position: absolute;
-            width: 320px;
-            height: 320px;
+            width: 300px;
+            height: 300px;
             background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, rgba(8, 8, 10, 0) 70%);
             pointer-events: none;
             z-index: 0;
@@ -90,8 +86,8 @@
         </div>
 
         <!-- Sticky Glass Header -->
-        <header class="sticky top-0 z-40 w-full max-w-7xl px-4 sm:px-8 py-4 flex items-center justify-between backdrop-blur-xl bg-[#08080A]/80 border-b border-white/5">
-            <div class="flex items-center gap-3">
+        <header class="sticky top-0 z-40 w-full max-w-7xl px-4 sm:px-8 py-3.5 flex items-center justify-between backdrop-blur-xl bg-[#08080A]/80 border-b border-white/5">
+            <div class="flex items-center gap-2.5">
                 <a href="#" class="font-serif-luxury font-black text-2xl sm:text-3xl tracking-wider text-white">
                     ASIRO<span class="gold-text-gradient font-light">ELITE</span>
                 </a>
@@ -101,7 +97,7 @@
             </div>
 
             <!-- Cart Trigger Button -->
-            <button id="cart-btn" onclick="openCartDrawer()" class="relative p-3 bg-[#13151C] text-white rounded-full border border-white/10 hover:border-[#D4AF37]/50 transition-all active:scale-95 group">
+            <button id="cart-btn" onclick="openCartDrawer()" class="relative p-2.5 bg-[#13151C] text-white rounded-full border border-white/10 hover:border-[#D4AF37]/50 transition-all active:scale-95 group">
                 <svg class="w-5 h-5 text-gray-300 group-hover:text-[#D4AF37] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                 </svg>
@@ -110,15 +106,15 @@
         </header>
 
         <!-- Main Content -->
-        <main class="relative z-10 w-full max-w-7xl px-3 sm:px-6 py-6 sm:py-8 space-y-8 sm:space-y-12">
+        <main class="relative z-10 w-full max-w-7xl px-3 sm:px-6 py-4 sm:py-8 space-y-6 sm:space-y-10">
             
             <!-- Hero Showcase Banner -->
-            <div class="relative w-full rounded-3xl p-6 sm:p-12 overflow-hidden border border-[#D4AF37]/20 bg-gradient-to-br from-[#12141A] via-[#0D0E12] to-[#08080A] shadow-2xl">
+            <div class="relative w-full rounded-3xl p-5 sm:p-10 overflow-hidden border border-[#D4AF37]/20 bg-gradient-to-br from-[#12141A] via-[#0D0E12] to-[#08080A] shadow-2xl">
                 <div class="ambient-glow -top-20 -left-20"></div>
                 <div class="ambient-glow -bottom-20 -right-20"></div>
 
-                <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
-                    <div class="w-full lg:max-w-xl space-y-4 text-left">
+                <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-6">
+                    <div class="w-full lg:max-w-xl space-y-3.5 text-left">
                         <div class="flex flex-wrap gap-2 items-center">
                             <span class="inline-block text-[10px] font-black tracking-widest uppercase px-3 py-1 bg-[#D4AF37]/10 text-[#E6C687] rounded-full border border-[#D4AF37]/30">
                                 VIP SNEAKER VAULT
@@ -128,7 +124,7 @@
                             </span>
                         </div>
                         
-                        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-none text-white">
+                        <h1 class="text-2xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-none text-white">
                             AUTHENTIC GRAILS.<br />
                             <span class="font-serif-luxury italic font-normal gold-text-gradient">CURATED FOR ELITES.</span>
                         </h1>
@@ -138,22 +134,22 @@
                         </p>
                     </div>
 
-                    <!-- Pure Image Live Vault Slider -->
-                    <div class="w-full lg:max-w-md overflow-hidden pt-2">
+                    <!-- Compact Studio Gallery Slider -->
+                    <div class="w-full lg:max-w-md overflow-hidden pt-1">
                         <div class="flex items-center justify-between pb-2 px-1">
                             <span class="text-[10px] font-bold tracking-widest text-[#E6C687] uppercase">🔥 LIVE VAULT GALLERY</span>
-                            <span class="text-[10px] font-medium text-gray-500">Swipe or tap to view</span>
+                            <span class="text-[10px] font-medium text-gray-500">Swipe to browse</span>
                         </div>
-                        <div id="hero-preview" class="flex gap-3 overflow-x-auto no-scrollbar py-2 touch-pan-x"></div>
+                        <div id="hero-preview" class="flex gap-2.5 overflow-x-auto no-scrollbar py-1 touch-pan-x"></div>
                     </div>
                 </div>
             </div>
 
             <!-- Value Props Banner -->
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div class="glass-card p-4 rounded-2xl flex items-center gap-3.5 border border-white/5 hover:border-[#D4AF37]/30 transition-all">
-                    <div class="p-3 bg-[#1A1D26] text-[#E6C687] rounded-xl border border-white/10 flex-shrink-0">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="glass-card p-3.5 rounded-2xl flex items-center gap-3 border border-white/5 hover:border-[#D4AF37]/30 transition-all">
+                    <div class="p-2.5 bg-[#1A1D26] text-[#E6C687] rounded-xl border border-white/10 flex-shrink-0">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                         </svg>
                     </div>
@@ -163,9 +159,9 @@
                     </div>
                 </div>
 
-                <div class="glass-card p-4 rounded-2xl flex items-center gap-3.5 border border-white/5 hover:border-[#D4AF37]/30 transition-all">
-                    <div class="p-3 bg-[#1A1D26] text-[#E6C687] rounded-xl border border-white/10 flex-shrink-0">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="glass-card p-3.5 rounded-2xl flex items-center gap-3 border border-white/5 hover:border-[#D4AF37]/30 transition-all">
+                    <div class="p-2.5 bg-[#1A1D26] text-[#E6C687] rounded-xl border border-white/10 flex-shrink-0">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
                         </svg>
                     </div>
@@ -175,9 +171,9 @@
                     </div>
                 </div>
 
-                <div class="glass-card p-4 rounded-2xl flex items-center gap-3.5 border border-white/5 hover:border-[#D4AF37]/30 transition-all">
-                    <div class="p-3 bg-[#1A1D26] text-[#E6C687] rounded-xl border border-white/10 flex-shrink-0">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="glass-card p-3.5 rounded-2xl flex items-center gap-3 border border-white/5 hover:border-[#D4AF37]/30 transition-all">
+                    <div class="p-2.5 bg-[#1A1D26] text-[#E6C687] rounded-xl border border-white/10 flex-shrink-0">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
                     </div>
@@ -189,11 +185,11 @@
             </div>
 
             <!-- Brand Filter Bar -->
-            <div class="w-full space-y-3 pt-2">
+            <div class="w-full space-y-2.5 pt-1">
                 <div class="flex justify-between items-center px-1">
                     <span class="text-xs font-bold text-[#E6C687] tracking-widest uppercase">• FILTER BY BRAND</span>
                 </div>
-                <div id="brand-filters" class="w-full flex gap-2.5 overflow-x-auto no-scrollbar pb-1"></div>
+                <div id="brand-filters" class="w-full flex gap-2 overflow-x-auto no-scrollbar pb-1"></div>
             </div>
 
             <!-- Product Grid -->
@@ -202,7 +198,7 @@
         </main>
 
         <!-- Footer -->
-        <footer class="w-full border-t border-white/5 mt-16 py-10 text-center text-xs font-medium text-gray-500 space-y-3 bg-[#050507]">
+        <footer class="w-full border-t border-white/5 mt-12 py-8 text-center text-xs font-medium text-gray-500 space-y-2 bg-[#050507]">
             <p class="tracking-wider text-gray-400">🚚 Shipping Partner: Express DTDC Delivery | 🔄 Size Exchange Support Available</p>
             <p class="text-[11px] font-serif-luxury text-[#E6C687]/60">© 2026 ASIRO ELITE. All Rights Reserved. Verified Authentic Grails.</p>
         </footer>
@@ -220,12 +216,11 @@
             </button>
 
             <!-- Zoomed Product Image Display -->
-            <div class="w-full md:w-1/2 bg-gradient-to-b from-[#181B24] to-[#0F1117] p-2 sm:p-4 flex items-center justify-center min-h-[300px] sm:min-h-[380px] overflow-hidden border-b md:border-b-0 md:border-r border-white/5 relative">
-                <div class="ambient-glow"></div>
-                <img id="modal-image" src="" alt="" class="relative z-10 w-full h-full max-h-[350px] sm:max-h-[420px] object-cover sm:object-contain scale-125 sm:scale-110 transform transition-transform duration-300 drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)]" />
+            <div class="w-full md:w-1/2 bg-[#F5F5F7] p-6 sm:p-8 flex items-center justify-center min-h-[280px] sm:min-h-[380px] overflow-hidden border-b md:border-b-0 md:border-r border-white/5 relative">
+                <img id="modal-image" src="" alt="" class="w-full h-full max-h-[320px] sm:max-h-[380px] object-contain transform hover:scale-105 transition-transform duration-300 drop-shadow-[0_15px_25px_rgba(0,0,0,0.15)]" />
             </div>
 
-            <div class="w-full md:w-1/2 p-6 sm:p-8 flex flex-col justify-between space-y-6">
+            <div class="w-full md:w-1/2 p-6 sm:p-8 flex flex-col justify-between space-y-5">
                 <div class="space-y-4">
                     <span id="modal-badge" class="inline-block text-[10px] font-black tracking-widest uppercase px-3 py-1 bg-[#D4AF37]/10 text-[#E6C687] rounded-full border border-[#D4AF37]/30"></span>
                     
@@ -1305,7 +1300,7 @@
             renderProducts();
         }
 
-        /* Pure Sneaker Image Gallery Slider for Live Vault */
+        /* Studio Gallery Slider for Live Vault */
         function renderHeroPreview() {
             const container = document.getElementById('hero-preview');
             const loopList = [...PRODUCTS, ...PRODUCTS, ...PRODUCTS];
@@ -1313,8 +1308,8 @@
             container.innerHTML = loopList.map((p, index) => {
                 const originalIndex = index % PRODUCTS.length;
                 return `
-                    <div onclick="openModal(${originalIndex})" class="min-w-[110px] sm:min-w-[130px] aspect-square bg-gradient-to-b from-[#181B26] to-[#0F1118] p-2.5 rounded-2xl border border-white/10 hover:border-[#D4AF37] cursor-pointer transition-all flex-shrink-0 active:scale-95 group relative flex items-center justify-center shadow-lg">
-                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-contain pointer-events-none group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_8px_12px_rgba(0,0,0,0.8)]" />
+                    <div onclick="openModal(${originalIndex})" class="w-24 sm:w-28 h-24 sm:h-28 bg-[#F5F5F7] rounded-2xl border border-white/10 hover:border-[#D4AF37] cursor-pointer transition-all flex-shrink-0 active:scale-95 group relative flex items-center justify-center p-2 overflow-hidden shadow-lg">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-contain pointer-events-none group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_4px_8px_rgba(0,0,0,0.15)]" />
                     </div>
                 `;
             }).join('');
@@ -1381,21 +1376,22 @@
             }
 
             container.innerHTML = displayList.map(p => `
-                <div onclick="openModal(${p.origIdx})" class="group w-full glass-card rounded-2xl sm:rounded-3xl p-3 sm:p-4 border border-white/5 shadow-xl flex flex-col justify-between space-y-3 cursor-pointer gold-border-glow transition-all active:scale-[0.98]">
+                <div onclick="openModal(${p.origIdx})" class="group w-full glass-card rounded-2xl sm:rounded-3xl p-2.5 sm:p-3.5 border border-white/5 shadow-xl flex flex-col justify-between space-y-2.5 cursor-pointer gold-border-glow transition-all active:scale-[0.98]">
                     
-                    <div class="relative w-full bg-[#181B24] rounded-xl sm:rounded-2xl p-3 flex items-center justify-center aspect-[4/3] sm:aspect-square overflow-hidden">
-                        <span class="absolute top-2 left-2 sm:top-3 sm:left-3 z-10 text-[8px] sm:text-[10px] font-black uppercase tracking-widest bg-black/80 text-[#E6C687] px-2 py-1 rounded-md border border-[#D4AF37]/30 backdrop-blur-md">
+                    <!-- HIGH-VISIBILITY CLEAN STUDIO SNEAKER DISPLAY -->
+                    <div class="relative w-full bg-[#F5F5F7] rounded-xl sm:rounded-2xl p-2.5 flex items-center justify-center aspect-square overflow-hidden shadow-inner">
+                        <span class="absolute top-2 left-2 z-10 text-[8px] sm:text-[9px] font-black uppercase tracking-widest bg-black/85 text-[#E6C687] px-2 py-0.5 rounded border border-[#D4AF37]/30 backdrop-blur-md">
                             ${p.badge}
                         </span>
-                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500 drop-shadow-[0_10px_15px_rgba(0,0,0,0.6)]" />
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-contain group-hover:scale-108 transition-transform duration-300 drop-shadow-[0_8px_16px_rgba(0,0,0,0.18)]" />
                     </div>
 
-                    <div class="space-y-1 px-1">
-                        <h3 class="text-xs sm:text-sm font-bold tracking-tight text-white line-clamp-2 leading-snug group-hover:text-[#E6C687] transition-colors">${p.name}</h3>
-                        <p class="text-sm sm:text-lg font-black gold-text-gradient pt-0.5">₹${p.price.toLocaleString('en-IN')}</p>
+                    <div class="space-y-0.5 px-0.5">
+                        <h3 class="text-[11px] sm:text-xs font-bold tracking-tight text-white line-clamp-1 group-hover:text-[#E6C687] transition-colors">${p.name}</h3>
+                        <p class="text-xs sm:text-base font-black gold-text-gradient">₹${p.price.toLocaleString('en-IN')}</p>
                     </div>
 
-                    <button onclick="event.stopPropagation(); openModal(${p.origIdx})" class="w-full bg-[#1A1D26] hover:bg-gradient-to-r hover:from-[#D4AF37] hover:to-[#AA7C11] text-gray-200 hover:text-black font-extrabold text-[10px] sm:text-xs uppercase tracking-wider py-2.5 sm:py-3 rounded-xl transition-all border border-white/5 active:scale-95">
+                    <button onclick="event.stopPropagation(); openModal(${p.origIdx})" class="w-full bg-[#1A1D26] hover:bg-gradient-to-r hover:from-[#D4AF37] hover:to-[#AA7C11] text-gray-200 hover:text-black font-extrabold text-[9px] sm:text-[11px] uppercase tracking-wider py-2 sm:py-2.5 rounded-xl transition-all border border-white/5 active:scale-95">
                         ADD TO BAG / DETAILS
                     </button>
                 </div>
@@ -1508,7 +1504,7 @@
                 cartItemsList.innerHTML = cart.map((item, idx) => `
                     <div class="flex items-center justify-between bg-[#161822] p-3.5 rounded-2xl border border-white/5">
                         <div class="flex items-center gap-3.5">
-                            <div class="w-16 h-16 bg-[#1D202C] rounded-xl p-1.5 flex items-center justify-center flex-shrink-0">
+                            <div class="w-16 h-16 bg-[#F5F5F7] rounded-xl p-1.5 flex items-center justify-center flex-shrink-0">
                                 <img src="${item.image}" alt="${item.name}" class="max-h-full object-contain" />
                             </div>
                             <div>
