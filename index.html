@@ -1337,7 +1337,7 @@
             },
             {
                 name: "CONVERSE X MADHAPPY",
-                price: 2699,
+                price: 2399,
                 image: "https://i.postimg.cc/HxDZB4Yj/Gemini-Generated-Image-sy5kvcsy5kvcsy5k.png",
                 badge: "HYPED",
                 sizes: [40, 41, 42, 43, 44],
@@ -1351,12 +1351,138 @@
             },
             {
                 name: "Nike Air Force 1 Low Syna \"Dark Beetroot NIKE ZOOM FIELD JAXX",
-                price: 2699,
+                price: 2399,
                 image: "https://i.postimg.cc/LsZQt0Mc/Gemini-Generated-Image-zbhit8zbhit8zbhi.png",
                 badge: "TRENDING",
                 sizes: [40, 41, 42, 43, 44, 45],
                 description: [
                     "Premium leather quality material",
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "Same quality as retail stores",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "Newbalance 9060",
+                price: 2599,
+                image: "https://i.ibb.co/8gw4w0zw/image.png",
+                badge: "GRAIL",
+                sizes: [40, 41, 42, 43, 44, 45],
+                description: [
+                    "Premium leather quality",
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "Same quality as retail stores",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "Forum 84 Low Girls",
+                price: 2499,
+                image: "https://i.ibb.co/20gJjbKp/image.png",
+                badge: "TRENDING",
+                sizes: [36, 37, 38, 39, 40],
+                description: [
+                    "FOR GIRLS • Premium leather quality",
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "Same quality as retail stores",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "P6000 Women",
+                price: 2699,
+                image: "https://i.ibb.co/RT4vz2LT/image.png",
+                badge: "HYPED",
+                sizes: [36, 37, 38, 39, 40],
+                description: [
+                    "FOR WOMEN • Premium leather quality",
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "Same quality as retail stores",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "Zoom Field Jaxx",
+                price: 2799,
+                image: "https://i.ibb.co/ymqsyGrH/image.png",
+                badge: "GRAIL",
+                sizes: [40, 41, 42, 43, 44, 45],
+                description: [
+                    "Premium leather quality material",
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "Same quality as retail stores",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "Palermo Girls",
+                price: 2399,
+                image: "https://i.ibb.co/Gv0WBL6M/image.png",
+                badge: "HYPE",
+                sizes: [36, 37, 38, 39, 40],
+                description: [
+                    "FOR GIRLS • Premium leather quality",
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "Same quality as retail stores",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "Barreda Mary Jane",
+                price: 2499,
+                image: "https://i.ibb.co/gLL1NVvj/image.png",
+                badge: "TRENDING",
+                sizes: [36, 37, 38, 39, 40],
+                description: [
+                    "High end quality • Premium leather",
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "Same quality as retail stores",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "Forum 84 Mid",
+                price: 3199,
+                image: "https://i.ibb.co/Xf6CpkGj/image.png",
+                badge: "LUXURY",
+                sizes: [40, 41, 42, 43, 44, 45],
+                description: [
+                    "Premium leather quality material",
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "Same quality as retail stores",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "Converse X Golf Le Fleur",
+                price: 2699,
+                image: "https://i.ibb.co/07fJm44/image.png",
+                badge: "LIMITED",
+                sizes: [39, 40, 41, 42, 43],
+                description: [
+                    "Collaboration Edition • High end quality",
+                    "Free Shipping via Express DTDC Delivery",
+                    "Includes Original (OG) Box",
+                    "Same quality as retail stores",
+                    "If you need more photos, DM me"
+                ]
+            },
+            {
+                name: "Converse X Golf Le Fleur",
+                price: 2699,
+                image: "https://i.ibb.co/d0QnGZTb/image.png",
+                badge: "LIMITED",
+                sizes: [39, 40, 41, 42, 43],
+                description: [
+                    "Collaboration Edition • High end quality",
                     "Free Shipping via Express DTDC Delivery",
                     "Includes Original (OG) Box",
                     "Same quality as retail stores",
@@ -1376,7 +1502,7 @@
 
         shuffleArray(PRODUCTS);
 
-        const BRANDS = ["ALL COLLECTION", "NIKE", "ADIDAS", "ASICS", "PUMA", "ONITSUKA", "VANS", "CONVERSE"];
+        const BRANDS = ["ALL COLLECTION", "NIKE", "ADIDAS", "ASICS", "PUMA", "ONITSUKA", "VANS", "CONVERSE", "NEW BALANCE", "BALENCIAGA", "SAUCONY"];
 
         let selectedBrand = "ALL COLLECTION";
         let searchQuery = "";
@@ -1415,6 +1541,8 @@
                 const nameUpper = p.name.toUpperCase();
                 if (filterKey === "ASICS" && (nameUpper.includes("ONITSUKA") || nameUpper.includes("ASICS"))) return true;
                 if (filterKey === "NIKE" && (nameUpper.includes("NIKE") || nameUpper.includes("JORDAN") || nameUpper.includes("AIRFORCE"))) return true;
+                if (filterKey === "NEW BALANCE" && (nameUpper.includes("NEW BALANCE") || nameUpper.includes("NEWBALANCE"))) return true;
+                if (filterKey === "BALENCIAGA" && (nameUpper.includes("BALENCIAGA") || nameUpper.includes("BALANCIAGA"))) return true;
                 return nameUpper.includes(filterKey);
             }).length;
         }
@@ -1510,6 +1638,8 @@
                         const nameUpper = p.name.toUpperCase();
                         if (filterKey === "ASICS" && (nameUpper.includes("ONITSUKA") || nameUpper.includes("ASICS"))) return true;
                         if (filterKey === "NIKE" && (nameUpper.includes("NIKE") || nameUpper.includes("JORDAN") || nameUpper.includes("AIRFORCE"))) return true;
+                        if (filterKey === "NEW BALANCE" && (nameUpper.includes("NEW BALANCE") || nameUpper.includes("NEWBALANCE"))) return true;
+                        if (filterKey === "BALENCIAGA" && (nameUpper.includes("BALENCIAGA") || nameUpper.includes("BALANCIAGA"))) return true;
                         return nameUpper.includes(filterKey);
                     });
 
